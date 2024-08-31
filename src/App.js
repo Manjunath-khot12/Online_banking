@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useAuth, AuthProvider } from "./context/AuthContext";
+import Home from './pages/Home';
+import Login from './pages/login';
+import Register from './pages/Registration';
+import UserHome from './pages/user/UserHome';
+import MainNavbar from './components/navbar/MainNavbar';
+import UserNavbar from './components/navbar/UserNavbar';
+
+function AppContent() {
+  const { isAuthenticated } = useAuth();
+
+  return (
+    <>
+      {isAuthenticated ? <UserNavbar /> : <MainNavbar />}
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/pages/Home" element={<Home />} />
+        <Route path="/pages/login" element={<Login />} />
+        <Route path="/pages/Registration" element={<Register />} />
+        
+        {/* User Routes */}
+        {isAuthenticated && (
+          <Route path="/pages/user/UserHome" element={<UserHome />} />
+        )}
+
+        {/* Redirect to Home or Login based on authentication */}
+        <Route path="/" element={<Navigate to={isAuthenticated ? "/pages/user/UserHome" : "/pages/Home"} />} />
+      </Routes>
+    </>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </Router>
   );
 }
 
