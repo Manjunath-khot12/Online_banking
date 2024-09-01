@@ -74,6 +74,7 @@ function Login() {
                                 <label htmlFor="username" className="form-label">Username:</label>
                                 <input
                                     type="text"
+                                    placeholder="Enter the Username"
                                     className="form-control"
                                     id="username"
                                     value={email}
@@ -85,6 +86,7 @@ function Login() {
                                 <label htmlFor="password" className="form-label">Password:</label>
                                 <input
                                     type="password"
+                                    placeholder="Enter the Password"
                                     className="form-control"
                                     id="password"
                                     value={password}
@@ -95,8 +97,11 @@ function Login() {
                             <div className="text-danger">{errors.global}</div>
                             <button type="submit" className="btn login-btn1 btn-primary mt-3">Login</button>
                             <button type="button" className="btn login-btn2 btn-primary mt-3" onClick={() => { setEmail(''); setPassword(''); setError({}); }}>Reset</button>
-                            <div className="mt-5 fs-5 text-center">
+                            <div className="mt-4 fs-5 text-center">
                                 <Link to="/pages/Registration">New User? Register Here.</Link>
+                            </div>
+                            <div className="mt-2 fs-5 text-center">
+                                <Link to="/pages/Registration">Forgot Password?</Link>
                             </div>
                         </form>
                     </div>

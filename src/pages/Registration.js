@@ -15,6 +15,7 @@ function Register() {
     const [password, setPassword] = useState('');
     const [address, setAddress] = useState('');
     const [gender, setGender] = useState('');
+    const [createdDate,setCreatedDate]=useState('');
     const [errors, setErrors] = useState({});
 
 
@@ -33,7 +34,7 @@ function Register() {
 
     async function validateForm() {
         try {
-            await userSchema.validate({ firstName, lastName, phoneNumber, age, email, password, address, gender }, { abortEarly: false });
+            await userSchema.validate({ firstName, lastName, phoneNumber, age, email, password, address, gender , createdDate }, { abortEarly: false });
             setErrors({});
             handleSubmit();
         } catch (error) {
@@ -46,7 +47,7 @@ function Register() {
     }
 
     async function handleSubmit() {
-        console.log("Submitting data:", { firstName, lastName, phoneNumber, age, email, password, address, gender });
+        console.log("Submitting data:", { firstName, lastName, phoneNumber, age, email, password, address, gender,createdDate });
         try {
             const response = await axios.post('http://localhost:8080/banking/register', {
                 firstName: firstName,
@@ -56,18 +57,21 @@ function Register() {
                 password: password,
                 age: age,
                 address: address,
-                gender: gender
+                gender: gender,
+                createdDate:createdDate
             });
 
             if (response.status === 200) {
                 alert('Registration successful');
-                navigate('/login');
+                navigate('/pages/login');
             }
         } catch (error) {
             console.error("Registration error:", error);
-            setErrors({ general: 'Registration failed. Please try again.' });
+            setErrors({ general: 'Already have Account.' });
         }
     }
+    
+   
 
    function handleReset()
    {
@@ -90,42 +94,42 @@ function Register() {
                     <form>
                         <div className="mb-3">
                             <label htmlFor="firstName" className="form-label">First Name:</label>
-                            <input type="text" className="form-control" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                            <input type="text" placeholder="Enter the First Name" className="form-control" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                             <div className="text-danger">{errors.firstName}</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="lastName" className="form-label">Last Name:</label>
-                            <input type="text" className="form-control" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                            <input type="text" placeholder="Enter the Last Name" className="form-control" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                             <div className="text-danger">{errors.lastName}</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="phoneNumber" className="form-label">Phone Number:</label>
-                            <input type="text" className="form-control" id="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                            <input type="text" placeholder="Enter the Phone Number" className="form-control" id="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                             <div className="text-danger">{errors.phoneNumber}</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email:</label>
-                            <input type="text" className="form-control" id="email" value={email} onChange={(e) =>setEmail(e.target.value)} />
+                            <input type="text" placeholder="Enter the Email Address" className="form-control" id="email" value={email} onChange={(e) =>setEmail(e.target.value)} />
                             <div className="text-danger">{errors.email}</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Password:</label>
-                            <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input type="password" placeholder="Enter the Password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                             <div className="text-danger">{errors.password}</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="age" className="form-label">Age:</label>
-                            <input type="number" className="form-control" id="age" value={age} onChange={(e) => setAge(e.target.value)} />
+                            <input type="number" placeholder="Enter the Age" className="form-control" id="age" value={age} onChange={(e) => setAge(e.target.value)} />
                             <div className="text-danger">{errors.age}</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="address" className="form-label">Address:</label>
-                            <input type="text" className="form-control" id="address" value={address} onChange={(e) => setAddress(e.target.value)} />
+                            <input type="text" placeholder="Enter the Address" className="form-control" id="address" value={address} onChange={(e) => setAddress(e.target.value)} />
                             <div className="text-danger">{errors.address}</div>
                         </div>
-                        <div className="mb-3">
+                        <div className="mb-3 form-group">
                             <label htmlFor="gender" className="form-label">Gender:</label>
-                            <select id="gender" className="form-control" value={gender} onChange={(e) => setGender(e.target.value)}>
+                            <select id="gender" className="form-control form-select" value={gender} onChange={(e) => setGender(e.target.value)}>
                                 <option value="">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -135,7 +139,7 @@ function Register() {
                         </div>
                         <button type="button" className="btn res-btn1 p-2 btn-success mt-3" onClick={validateForm}>Submit</button>
                         <button type="button" className="btn res-btn2 p-2 btn-success mt-3" onClick={handleReset}>Reset</button>
-                        <div className="text-danger reset mt-3">{errors.general}</div>
+                        <div className="text-danger fs-5 text-center mt-4">{errors.general}</div>
                         
                     </form>
                     <div className="mt-4 mb-5 fs-5 text-center">

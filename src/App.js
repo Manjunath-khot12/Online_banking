@@ -7,6 +7,7 @@ import Register from './pages/Registration';
 import UserHome from './pages/user/UserHome';
 import MainNavbar from './components/navbar/MainNavbar';
 import UserNavbar from './components/navbar/UserNavbar';
+import CreateAccount from './pages/user/CreateAccount';
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
@@ -22,14 +23,18 @@ function AppContent() {
         
         {/* User Routes */}
         {isAuthenticated && (
-          <Route path="/pages/user/UserHome" element={<UserHome />} />
+          <>
+            <Route path="/pages/user/UserHome" element={<UserHome />} />
+            <Route path="/pages/user/CreateAccount" element={<CreateAccount />} />
+          </>
         )}
-
+  
         {/* Redirect to Home or Login based on authentication */}
         <Route path="/" element={<Navigate to={isAuthenticated ? "/pages/user/UserHome" : "/pages/Home"} />} />
       </Routes>
     </>
   );
+  
 }
 
 function App() {
