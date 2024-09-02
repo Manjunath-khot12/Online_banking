@@ -4,6 +4,7 @@ import { useAuth, AuthProvider } from "./context/AuthContext";
 import Home from './pages/Home';
 import Login from './pages/login';
 import Register from './pages/Registration';
+import ForgotPassword from './pages/ForgotPassword';
 import UserHome from './pages/user/UserHome';
 import MainNavbar from './components/navbar/MainNavbar';
 import UserNavbar from './components/navbar/UserNavbar';
@@ -20,6 +21,7 @@ function AppContent() {
         <Route path="/pages/Home" element={<Home />} />
         <Route path="/pages/login" element={<Login />} />
         <Route path="/pages/Registration" element={<Register />} />
+        <Route path="/pages/ForgotPassword" element={<ForgotPassword />} />
         
         {/* User Routes */}
         {isAuthenticated && (

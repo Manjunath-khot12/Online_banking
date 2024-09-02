@@ -62,7 +62,10 @@ function Register() {
             });
 
             if (response.status === 200) {
-                alert('Registration successful');
+                alert(`Registration successful
+                      
+                        Username is : ${email}
+                        Password is : ${password}`);
                 navigate('/pages/login');
             }
         } catch (error) {
@@ -83,6 +86,7 @@ function Register() {
          setAge('');
          setAddress('');
          setGender('');
+         setErrors({});
    }
 
 

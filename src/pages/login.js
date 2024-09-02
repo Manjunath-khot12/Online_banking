@@ -10,6 +10,8 @@ import { useNavigate, Link } from 'react-router-dom';
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const[firstName,setFirstName]=useState('');
+    const[customerID,setCustomerId]=useState('');
     const [errors, setError] = useState({});
     const { login } = useAuth();
     const navigate = useNavigate();
@@ -45,15 +47,21 @@ function Login() {
             setError({ global: 'Username cannot be empty' });
             return;
         }
-    
+
         if (isValid) {
             try {
                 const response = await axios.post('http://localhost:8080/banking/login', { email, password });
                 if (response.status === 200) {
-                    alert("Login Successful");
+                    const data = response.data;
+                    setFirstName(data.firstName);
+                    setCustomerId(data.customerID);
+                    alert(`Welcome, ${data.firstName}
+                           \n Customer Id is : ${data.customerID}`);
                     login(); // Set authentication state
-                    navigate('/user/UserHome'); // Redirect to user home
-                } else {
+                    navigate('/user/UserHome', { state: { firstName: data.firstName, customerId: data.customerID } });
+                } 
+                else
+                {
                     setError({ global: "Invalid Credentials" });
                 }
             } catch (error) {
@@ -101,7 +109,7 @@ function Login() {
                                 <Link to="/pages/Registration">New User? Register Here.</Link>
                             </div>
                             <div className="mt-2 fs-5 text-center">
-                                <Link to="/pages/Registration">Forgot Password?</Link>
+                                <Link to="/pages/ForgotPassword">Forgot Password?</Link>
                             </div>
                         </form>
                     </div>
