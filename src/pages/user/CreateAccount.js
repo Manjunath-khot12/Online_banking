@@ -10,19 +10,21 @@ function CreateAccount()
     const[adharaNumber,setAdharaNumber]=useState('');
     const[panNumber,setPanNumber]=useState('');
     const[accountType,setAccountType]=useState('');
+    const[initialDeposit,setInitialDeposit]=useState('');
     const[error,setError]=useState({});
 
     const userSchema = yup.object().shape({
         customerId:yup.string().required("Customer id is Required"),
         adharaNumber:yup.string().matches(/^\d{12}$/, 'Adhara Number must be a 12-digit number').required("Adhara Number is required"),
         panNumber:yup.string().required("Pan Number is required"),
-        accountType:yup.string().required("Account type is required")
+        accountType:yup.string().required("Account type is required"),
+        initialDeposit:yup.number().typeError("Deposit must be a number").integer("Deposit must be an integer").min(1000,"Minimum 1000 Rupees initial deposit ").required("Initial Deposit is required")
     });
     
      
     async function validateForm() {
         try {
-            await userSchema.validate({ customerId, adharaNumber, panNumber, accountType }, { abortEarly: false });
+            await userSchema.validate({ customerId, adharaNumber, panNumber, accountType,initialDeposit }, { abortEarly: false });
             setError({});
             handleSubmit();
         } catch (error) {
@@ -39,7 +41,8 @@ function CreateAccount()
             const response = await axios.post(`http://localhost:8080/banking/createAccount?userId=${customerId}`, {
                 adharaNumber: adharaNumber,
                 panNumber: panNumber,
-                accountType: accountType
+                accountType: accountType,
+                initialDeposit:initialDeposit
             });
 
             if (response.status === 201) {
@@ -59,9 +62,11 @@ function CreateAccount()
         setAdharaNumber('');
         setCustomerId('');
         setPanNumber('');
+        setInitialDeposit('');
+        setError({});
     }
     return(
-        <div className='container-fluid mt-1  p-5 d-flex justify-content-center'>
+        <div className='container-fluid mt-0  p-5 d-flex justify-content-center'>
             <div className='row  registration-contanier  justify-content-center'>
             <p id="Registration-heading" className='mt-4'>Create Account</p>
                 <div className='col-md-10'>
@@ -90,6 +95,11 @@ function CreateAccount()
                                 <option value="FD">FD-Account</option>
                             </select>
                             <div className='text-danger'>{error.accountType}</div>
+                        </div>
+                        <div className='mt-3'>
+                            <label htmlFor='initialDeposit' className='form-label'>Enter Initial Deposit :</label>
+                            <input type='number' className='form-control' id='initialDeposit' placeholder='Enter Initial deposit Amount' value={initialDeposit} onChange={(e)=>setInitialDeposit(e.target.value)}/>
+                            <div className='text-danger'>{error.initialDeposit}</div>
                         </div>
                         <button type="button" className="btn res-btn1 p-2 btn-success mt-3" onClick={validateForm}>Create Account</button>
                         <button type="button" className="btn res-btn2 p-2 btn-success mt-3" onClick={handleReset}>Reset</button>
