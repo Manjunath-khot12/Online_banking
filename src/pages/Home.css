@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 #logo
@@ -18,11 +19,12 @@
     display: flex;
     justify-content: start; 
     align-items: center;
-    position: fixed;
-    top: 0;
-    width: 100%;
 }
-
+.nav-position
+{
+    position:fixed;
+    top: 0;
+}
 /* Style for nav links container */
 .nav-links {
     list-style: none; /* Remove bullet points */
@@ -168,6 +170,12 @@
 {
     position: relative;
     top: -815px;
+    left: 900px;
+}
+.acc-info-logout
+{
+    position: relative;
+    top: -320px;
     left: 900px;
 }
 

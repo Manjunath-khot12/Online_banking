@@ -113,12 +113,10 @@ function CreateAccount()
                             <div className='text-danger'>{error.initialDeposit}</div>
                         </div>
                         <button type="button" className="btn res-btn1 p-2 btn-success mt-3" onClick={validateForm}>Create Account</button>
-                        <button type="button" className="btn res-btn2 p-2 btn-success mt-3" onClick={handleReset}>Reset</button>
+                        <button type="button" className="btn res-btn2 p-2 btn-primary mt-3" onClick={handleReset}>Reset</button>
                         <div className="text-danger fs-5 text-center mt-4 mt-5">{error.general}</div>
                         <button className="btn res-btn2 p-2 btn-success mt-3 logout-acc" onClick={handleLogout}>Logout</button>
-
-                    </form>
-                    
+                    </form>               
                 </div>
             </div>
         </div>
