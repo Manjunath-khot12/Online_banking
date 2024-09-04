@@ -9,6 +9,7 @@ import UserHome from './pages/user/UserHome';
 import MainNavbar from './components/navbar/MainNavbar';
 import UserNavbar from './components/navbar/UserNavbar';
 import CreateAccount from './pages/user/CreateAccount';
+import AccountDetails from './pages/user/AccountDetials';
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
@@ -28,6 +29,7 @@ function AppContent() {
           <>
             <Route path="/pages/user/UserHome" element={<UserHome />} />
             <Route path="/pages/user/CreateAccount" element={<CreateAccount />} />
+            <Route path="/pages/user/AccountDetials" element={<AccountDetails />} />
           </>
         )}
   

@@ -58,7 +58,8 @@ function Login() {
                     alert(`Welcome, ${data.firstName}
                            \n Customer Id is : ${data.customerID}`);
                     login(); // Set authentication state
-                    navigate('/user/UserHome', { state: { firstName: data.firstName, customerId: data.customerID } });
+                    console.log("Navigating with data:", data.firstName, data.customerID);
+                    navigate('/pages/user/UserHome', { state: { firstName: data.firstName, customerId: data.customerID } });
                 } 
                 else
                 {

@@ -3,6 +3,8 @@ import * as yup from 'yup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Home.css';
 import axios from 'axios';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function CreateAccount()
 {
@@ -12,6 +14,8 @@ function CreateAccount()
     const[accountType,setAccountType]=useState('');
     const[initialDeposit,setInitialDeposit]=useState('');
     const[error,setError]=useState({});
+    const { logout } = useAuth();
+    const navigate = useNavigate();
 
     const userSchema = yup.object().shape({
         customerId:yup.string().required("Customer id is Required"),
@@ -65,6 +69,13 @@ function CreateAccount()
         setInitialDeposit('');
         setError({});
     }
+
+    const handleLogout = () => {
+        logout();
+        navigate('/pages/Home');
+    };
+
+
     return(
         <div className='container-fluid mt-0  p-5 d-flex justify-content-center'>
             <div className='row  registration-contanier  justify-content-center'>
@@ -86,7 +97,7 @@ function CreateAccount()
                             <input type='text' className='form-control' id='panNumber' placeholder='Enter the Pan Number' value={panNumber} onChange={(e)=>setPanNumber(e.target.value)}/>
                             <div className='text-danger'>{error.panNumber}</div>
                         </div>
-                        <div className='mt-3 mb-5 form-group'>
+                        <div className='mt-3  form-group'>
                             <label htmlFor='accountType' className='form-label'>Select The Account Type :</label>
                             <select id='accountType' className='form-control form-select' value={accountType} onChange={(e)=>setAccountType(e.target.value)} >
                                 <option value="">Select Your Account-Type</option>
@@ -104,7 +115,10 @@ function CreateAccount()
                         <button type="button" className="btn res-btn1 p-2 btn-success mt-3" onClick={validateForm}>Create Account</button>
                         <button type="button" className="btn res-btn2 p-2 btn-success mt-3" onClick={handleReset}>Reset</button>
                         <div className="text-danger fs-5 text-center mt-4 mt-5">{error.general}</div>
+                        <button className="btn res-btn2 p-2 btn-success mt-3 logout-acc" onClick={handleLogout}>Logout</button>
+
                     </form>
+                    
                 </div>
             </div>
         </div>
