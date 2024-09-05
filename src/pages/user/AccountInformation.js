@@ -71,7 +71,7 @@ function AccountInformation({ customerId }) {
                                 <tr className="text-center">
                                     <th>Account Number</th>
                                     <th>Account Type</th>
-                                    <th>Initial Deposit</th>
+                                    <th>Balance</th>
                                     <th>Created Date</th>
                                 </tr>
                             </thead>
