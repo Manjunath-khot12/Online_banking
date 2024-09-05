@@ -55,7 +55,7 @@ function ForgotPassword() {
 
     return (
         <div className="container-fluid d-flex justify-content-center mt-5">
-            <div className="row registration-contanier justify-content-center">
+            <div className="row shadow-lg registration-contanier justify-content-center">
                 <p id="Registration-heading" className='mt-4'>Forgot Password</p>
                 <div className="col-md-10">
                     <form>

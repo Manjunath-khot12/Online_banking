@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { FaUser, FaEnvelope, FaPhone, FaIdCard } from "react-icons/fa";
+import '../Home.css';
 
 function AccountInformation({ customerId }) {
     const [accountDetails, setAccountDetails] = useState([]);
@@ -27,38 +29,66 @@ function AccountInformation({ customerId }) {
     }
 
     if (!accountDetails.length) {
-        return <div className="text-danger">You Don't have any Account...</div>;
+        return <div className="text-danger text-center mt-4">You don't have any accounts.</div>;
     }
 
-    // Extract the firstName from the first account detail
     const firstName = accountDetails.length > 0 ? accountDetails[0].firstName : '';
+    const adharaNumber = accountDetails.length > 0 ? accountDetails[0].adharaNumber : '';
+    const email = accountDetails.length > 0 ? accountDetails[0].email : '';
+    const phoneNumber = accountDetails.length > 0 ? accountDetails[0].phoneNumber : '';
 
     return (
         <div className="container mt-4">
-            <h2>Account Information</h2>
-            {firstName && (
-                <div className="mb-3">
-                    <p className="fs-5">Customer Name : <span className="fs-4 text-primary">{firstName}</span></p>
+            <div className="card shadow-lg border-0 mb-4">
+                <div className="card-header bg-primary text-white">
+                    <h2 className="mb-0 text-center">Account Information</h2>
                 </div>
-            )}
-            {accountDetails.map((account, index) => (
-                <div key={index} className="card p-4 mb-3">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <h5>Account Number</h5>
-                            <p>{account.accountNumber}</p>
+                <div className="card-body">
+                    {firstName && (
+                        <div className="mb-3">
+                            <p className="fs-5"><FaUser /> Customer Name: <span className="fs-6 text-primary">{firstName}</span></p>
                         </div>
-                        <div className="col-md-6">
-                            <h5>Account Type</h5>
-                            <p>{account.accountType}</p>
+                    )}
+                    {email && (
+                        <div className="mb-3">
+                            <p className="fs-5"><FaEnvelope /> Email ID: <span className="fs-6 text-primary">{email}</span></p>
                         </div>
-                        <div className="col-md-6">
-                            <h5>Initial Deposit</h5>
-                            <p>₹ {account.initialDeposit}</p>
+                    )}
+                    {phoneNumber && (
+                        <div className="mb-3">
+                            <p className="fs-5"><FaPhone /> Phone Number: <span className="fs-6 text-primary">{phoneNumber}</span></p>
                         </div>
+                    )}
+                    {adharaNumber && (
+                        <div className="mb-1">
+                            <p className="fs-5"><FaIdCard /> Aadhar Card Number: <span className="fs-6 text-primary">{adharaNumber}</span></p>
+                        </div>
+                    )}
+
+                    <div className="table-responsive">
+                        <table className="table table-striped table-hover table-bordered mt-4">
+                            <thead className="bg-light">
+                                <tr className="text-center">
+                                    <th>Account Number</th>
+                                    <th>Account Type</th>
+                                    <th>Initial Deposit</th>
+                                    <th>Created Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {accountDetails.map((account, index) => (
+                                    <tr key={index} className="text-center">
+                                        <td>{account.accountNumber}</td>
+                                        <td>{account.accountType}</td>
+                                        <td>₹ {account.initialDeposit.toLocaleString()}</td>
+                                        <td>{account.createdDate}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            ))}
+            </div>
         </div>
     );
 }

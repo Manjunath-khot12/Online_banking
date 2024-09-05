@@ -75,7 +75,7 @@ function Login() {
     return (
         
             <div className="container-fluid d-flex justify-content-center  mt-5">   
-                <div className="row login-container justify-content-center">
+                <div className="row shadow-lg login-container justify-content-center">
                    <p id="Registration-heading" className="mt-4">Login Page</p>
                     <div className="col-md-10">
                         <form onSubmit={handleSubmit}>

@@ -3,7 +3,8 @@ import * as yup from 'yup';
 import AccountInformation from './AccountInformation';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import '../Home.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../Home.css'; // Custom CSS for additional styling
 
 function AccountDetails() {
     const { logout } = useAuth();
@@ -20,52 +21,74 @@ function AccountDetails() {
         try {
             await userSchema.validate({ customerId }, { abortEarly: false });
             setError({});
-            setShowAccountInfo(true); // Show the account information component on successful validation
+            setShowAccountInfo(true); // Show account info if validation is successful
         } catch (error) {
             const errorMessages = {};
             error.inner.forEach((e) => {
                 errorMessages[e.path] = e.message;
             });
             setError(errorMessages);
-            setShowAccountInfo(false); // Hide the account information component on error
+            setShowAccountInfo(false); // Hide account info if validation fails
         }
     }
 
     function handleReset() {
         setCustomerId('');
         setError({});
-        setShowAccountInfo(false); // Hide the account information component when resetting
+        setShowAccountInfo(false); // Hide account info on reset
     }
-    
+
     const handleLogout = () => {
         logout();
         navigate('/pages/Home');
     };
 
     return (
-        <div className="container mt-4 mb-4 d-flex justify-content-center">
-            <div className="row registration-contanier justify-content-center">
-                <div className="col-md-10">
-                    <form>
-                        <div className="mt-4">
-                            <label htmlFor="customerId" className="form-label">Enter the Customer ID</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="customerID"
-                                placeholder="Enter the Customer ID"
-                                value={customerId}
-                                onChange={(e) => setCustomerId(e.target.value)}
-                            />
-                        </div>
-                        <div className="text-danger mb-2">{error.customerId}</div>
-                        <button type="button" className="btn mb-3 res-btn1 btn-success mt-4" onClick={validateForm}>Submit</button>
-                        <button type="button" className="btn mb-3 res-btn2 btn-primary mt-4" onClick={handleReset}>Reset</button>
-                        <button className="btn res-btn2 p-2 btn-success mt-3 acc-info-logout" onClick={handleLogout}>Logout</button>
-                    </form>
-                    {/* Render the AccountInformation component if the form is validated */}
-                    {showAccountInfo && <AccountInformation customerId={customerId} />}
-                </div>
+        <div className="container-fluid mt-5 d-flex justify-content-center align-items-center">
+            <div className="card shadow-lg p-4 mb-5 bg-body rounded" style={{ width: '100%', maxWidth: '600px' }}>
+                <h2 className="text-center mb-4">Account Details</h2>
+                <form>
+                    <div className="mb-4">
+                        <label htmlFor="customerId" className="form-label">Customer ID</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="customerID"
+                            placeholder="Enter your Customer ID"
+                            value={customerId}
+                            onChange={(e) => setCustomerId(e.target.value)}
+                        />
+                        <div className="text-danger">{error.customerId}</div>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                        <button
+                            type="button"
+                            className="btn btn-success flex-grow-1 me-2"
+                            onClick={validateForm}
+                        >
+                            Submit
+                        </button>
+                        <button
+                            type="button"
+                            className="btn btn-secondary flex-grow-1 me-2"
+                            onClick={handleReset}
+                        >
+                            Reset
+                        </button>
+                        <button
+                            className="btn btn-danger flex-grow-1"
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </button>
+                    </div>
+                </form>
+                {/* Conditionally render the account information if the form is validated */}
+                {showAccountInfo && (
+                    <div className="mt-5">
+                        <AccountInformation customerId={customerId} />
+                    </div>
+                )}
             </div>
         </div>
     );

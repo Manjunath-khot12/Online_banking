@@ -62,10 +62,8 @@ function Register() {
             });
 
             if (response.status === 200) {
-                alert(`Registration successful
-                      
-                        Username is : ${email}
-                        Password is : ${password}`);
+                alert("Registration Successful\n\n"+
+                       "Your Login Details will be send through your Registered email id");
                 navigate('/pages/login');
             }
         } catch (error) {
@@ -92,7 +90,7 @@ function Register() {
 
     return (
         <div className="container-fluid d-flex justify-content-center  p-5 mb-5">
-            <div className="row registration-contanier  justify-content-center">
+            <div className="row shadow-lg registration-contanier  justify-content-center">
             <p id="Registration-heading">Registration Page</p>
                 <div className="col-md-10">
                     <form>
