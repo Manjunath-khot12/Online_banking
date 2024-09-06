@@ -90,7 +90,7 @@ function Register() {
 
     return (
         <div className="container-fluid d-flex justify-content-center  p-5 mb-5">
-            <div className="row shadow-lg registration-contanier  justify-content-center">
+            <div className="row shadow-lg   justify-content-center">
             <p id="Registration-heading">Registration Page</p>
                 <div className="col-md-10">
                     <form>

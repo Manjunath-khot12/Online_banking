@@ -78,28 +78,28 @@ function CreateAccount() {
                 <div className='col-lg-8'>
                     <div className='card shadow-lg p-4'>
                         <h2 className='text-center mb-4'>Create Account</h2>
-                        <form>
+                        <form autoComplete="off" >
                             <div className='form-group mb-3'>
                                 <label htmlFor='customerId' className='form-label'>Customer ID</label>
-                                <input type='text' className={`form-control ${error.customerId ? 'is-invalid' : ''}`} id='customerID' placeholder='Enter Customer ID' value={customerId} onChange={(e) => setCustomerId(e.target.value)} />
+                                <input type='text' className={`form-control ${error.customerId ? 'is-invalid' : ''}`} id='customerID' autoComplete="off"  placeholder='Enter Customer ID' value={customerId} onChange={(e) => setCustomerId(e.target.value)} />
                                 {error.customerId && <div className='invalid-feedback'>{error.customerId}</div>}
                             </div>
 
                             <div className='form-group mb-3'>
                                 <label htmlFor='adharaNumber' className='form-label'>Adhara Number</label>
-                                <input type='text' className={`form-control ${error.adharaNumber ? 'is-invalid' : ''}`} id='adharaNumber' placeholder='Enter Adhara Number' value={adharaNumber} onChange={(e) => setAdharaNumber(e.target.value)} />
+                                <input type='text' className={`form-control ${error.adharaNumber ? 'is-invalid' : ''}`} id='adharaNumber' autoComplete="off"  placeholder='Enter Adhara Number' value={adharaNumber} onChange={(e) => setAdharaNumber(e.target.value)} />
                                 {error.adharaNumber && <div className='invalid-feedback'>{error.adharaNumber}</div>}
                             </div>
 
                             <div className='form-group mb-3'>
                                 <label htmlFor='panNumber' className='form-label'>PAN Number</label>
-                                <input type='text' className={`form-control ${error.panNumber ? 'is-invalid' : ''}`} id='panNumber' placeholder='Enter PAN Number' value={panNumber} onChange={(e) => setPanNumber(e.target.value)} />
+                                <input type='text' className={`form-control ${error.panNumber ? 'is-invalid' : ''}`} id='panNumber' autoComplete="off"  placeholder='Enter PAN Number' value={panNumber} onChange={(e) => setPanNumber(e.target.value)} />
                                 {error.panNumber && <div className='invalid-feedback'>{error.panNumber}</div>}
                             </div>
 
                             <div className='form-group mb-3'>
                                 <label htmlFor='accountType' className='form-label'>Account Type</label>
-                                <select className={`form-control ${error.accountType ? 'is-invalid' : ''}`} id='accountType' value={accountType} onChange={(e) => setAccountType(e.target.value)}>
+                                <select className={`form-control ${error.accountType ? 'is-invalid' : ''}`} id='accountType' autoComplete="off"  value={accountType} onChange={(e) => setAccountType(e.target.value)}>
                                     <option value=''>Select Account Type</option>
                                     <option value='Saving'>Saving Account</option>
                                     <option value='Current'>Current Account</option>
@@ -110,7 +110,7 @@ function CreateAccount() {
 
                             <div className='form-group mb-3'>
                                 <label htmlFor='initialDeposit' className='form-label'>Initial Deposit</label>
-                                <input type='number' className={`form-control ${error.initialDeposit ? 'is-invalid' : ''}`} id='initialDeposit' placeholder='Enter Initial Deposit Amount' value={initialDeposit} onChange={(e) => setInitialDeposit(e.target.value)} />
+                                <input type='number' className={`form-control ${error.initialDeposit ? 'is-invalid' : ''}`} id='initialDeposit' autoComplete="off"  placeholder='Enter Initial Deposit Amount' value={initialDeposit} onChange={(e) => setInitialDeposit(e.target.value)} />
                                 {error.initialDeposit && <div className='invalid-feedback'>{error.initialDeposit}</div>}
                             </div>
 

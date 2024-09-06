@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import '../../pages/Home.css';
 import Transaction from '../../pages/user/Transaction';
+import Deposit from '../../pages/user/Deposit';
 
 const UserNavbar = () => {
     const [showDropdown, setShowDropdown] = useState(false);

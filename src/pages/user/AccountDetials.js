@@ -45,15 +45,16 @@ function AccountDetails() {
 
     return (
         <div className="container-fluid mt-5 d-flex justify-content-center align-items-center">
-            <div className="card shadow-lg p-4 mb-5 bg-body rounded" style={{ width: '100%', maxWidth: '600px' }}>
+            <div className="card shadow-lg p-4 mb-5 bg-body rounded" style={{ width: '100%', maxWidth: '1000px' }}>
                 <h2 className="text-center mb-4">Account Details</h2>
-                <form>
+                <form autoComplete="off" >
                     <div className="mb-4">
                         <label htmlFor="customerId" className="form-label">Customer ID</label>
                         <input
                             type="text"
                             className="form-control"
                             id="customerID"
+                            autoComplete="off" 
                             placeholder="Enter your Customer ID"
                             value={customerId}
                             onChange={(e) => setCustomerId(e.target.value)}

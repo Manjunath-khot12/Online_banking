@@ -75,10 +75,10 @@ function Login() {
     return (
         
             <div className="container-fluid d-flex justify-content-center  mt-5">   
-                <div className="row shadow-lg login-container justify-content-center">
+                <div className="row shadow-lg  justify-content-center">
                    <p id="Registration-heading" className="mt-4">Login Page</p>
                     <div className="col-md-10">
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} autoComplete="off">
                             <div className="mb-5">
                                 <label htmlFor="username" className="form-label">Username:</label>
                                 <input
@@ -86,6 +86,7 @@ function Login() {
                                     placeholder="Enter the Username"
                                     className="form-control"
                                     id="username"
+                                    autoComplete="off"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
@@ -98,6 +99,7 @@ function Login() {
                                     placeholder="Enter the Password"
                                     className="form-control"
                                     id="password"
+                                    autoComplete="off"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
@@ -109,7 +111,7 @@ function Login() {
                             <div className="mt-4 fs-5 text-center">
                                 <Link to="/pages/Registration">New User? Register Here.</Link>
                             </div>
-                            <div className="mt-2 fs-5 text-center">
+                            <div className="mt-2 mb-5 fs-5 text-center">
                                 <Link to="/pages/ForgotPassword">Forgot Password?</Link>
                             </div>
                         </form>

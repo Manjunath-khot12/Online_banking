@@ -56,10 +56,10 @@ function ForgotPassword() {
 
     return (
         <div className="container-fluid d-flex justify-content-center mt-5">
-            <div className="row shadow-lg registration-contanier justify-content-center">
+            <div className="row shadow-lg  justify-content-center">
                 <p id="Registration-heading" className='mt-4'>Forgot Password</p>
                 <div className="col-md-10">
-                    <form>
+                    <form autoComplete="off">
                         <div className="mt-3 mb-4">
                             <label htmlFor="email" className="form-label">Enter The Email Id:</label>
                             <input
@@ -68,6 +68,7 @@ function ForgotPassword() {
                                 value={email}
                                 className="form-control"
                                 placeholder="Enter the Email id"
+                                autoComplete="off"  // Disable autocomplete
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                             <div className="text-danger">{error.email}</div>

@@ -38,7 +38,7 @@ function AccountInformation({ customerId }) {
     const phoneNumber = accountDetails.length > 0 ? accountDetails[0].phoneNumber : '';
 
     return (
-        <div className="container mt-4">
+        <div className="container-fluid mt-4">
             <div className="card shadow-lg border-0 mb-4">
                 <div className="card-header bg-primary text-white">
                     <h2 className="mb-0 text-center">Account Information</h2>
@@ -65,10 +65,7 @@ function AccountInformation({ customerId }) {
                         </div>
                     )}
                     
-                    <div className="table-responsive">
-                    <div className=" mt-5 card-header bg-success text-white">
-                       <h2 className="mb-0 text-center">Account Types</h2>
-                     </div>
+                    <div className="table-responsive mt-5 mb-5">
                         <table className="table table-striped table-hover table-bordered mt-3">   
                             <thead className="bg-light">
                                 <tr className="text-center">
