@@ -297,3 +297,71 @@
 }
 
 
+/* UserNavbar.css */
+.navbar {
+    background-color: #333;
+    padding: 10px;
+}
+
+.nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-right: 15px;
+}
+
+.nav-links .link {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links .link:hover {
+    text-decoration: underline;
+}
+
+#logo {
+    height: 40px;
+    margin-right: 20px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.dropbtn:hover {
+    background-color: #555;
+}
+
+.dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content .link {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content .link:hover {
+    background-color: #f1f1f1;
+}

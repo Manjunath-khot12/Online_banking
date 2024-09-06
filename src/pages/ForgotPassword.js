@@ -36,8 +36,9 @@ function ForgotPassword() {
             if (response.status === 200) {
                 const data = response.data;
                 setFirstName(data.firstName);
-                setPassword(data.password);
-                alert(`Welcome, ${data.firstName}\nYour Password is: ${data.password}`);
+                setEmail(data.email);
+                // setPassword(data.password);
+                alert(`Hi, ${data.firstName}\n\nYour Password is send to your Registered Email id : ${data.email}`);
                 navigate('/pages/login');
             } else {
                 setError({ general: "Invalid Credentials" });

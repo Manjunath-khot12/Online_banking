@@ -64,9 +64,12 @@ function AccountInformation({ customerId }) {
                             <p className="fs-5"><FaIdCard /> Aadhar Card Number: <span className="fs-6 text-primary">{adharaNumber}</span></p>
                         </div>
                     )}
-
+                    
                     <div className="table-responsive">
-                        <table className="table table-striped table-hover table-bordered mt-4">
+                    <div className=" mt-5 card-header bg-success text-white">
+                       <h2 className="mb-0 text-center">Account Types</h2>
+                     </div>
+                        <table className="table table-striped table-hover table-bordered mt-3">   
                             <thead className="bg-light">
                                 <tr className="text-center">
                                     <th>Account Number</th>
