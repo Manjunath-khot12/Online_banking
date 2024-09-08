@@ -1,35 +1,32 @@
 import React,{useState} from "react";
 import * as yup from 'yup';
-import { useAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../Home.css';
 import axios from "axios";
 
-function Transaction()
+
+function Withdraw()
 {
     const[sourceAccount,setSourceAccount]=useState('');
-    const[destinationAccount,setDestinationAccount]=useState('');
     const[transactionType,setTransactionType]=useState('');
     const[transactionInfo,setTransactionInfo]=useState('');
     const[amount,setAmount]=useState('');
     const[error,setError]=useState({});
-    const { logout } = useAuth();
-    const navigate = useNavigate();
+
 
     const userSchema=yup.object().shape({
-        sourceAccount:yup.number().typeError("source Account must be a number").integer("Source Account must be integer").required("Source Account is Required"),
-        destinationAccount:yup.number().typeError("destination Account must be a number").integer("Destination Account must be Integer").required("destination account number required"),
-        transactionType:yup.string().required("Transaction type is required"),
-        transactionInfo:yup.string().required("transaction Information is required"),
-        amount:yup.number().typeError("Amount must be in number").required("Amount required")
+        sourceAccount:yup.number().typeError("Account Number Must Be Number").integer("Account Number Must Be Integer").required("Account Number Required"),
+        transactionType:yup.string().required("Transaction type required"),
+        transactionInfo:yup.string().required("transaction Information required"),
+        amount:yup.number().typeError("Amount must be Number").min(100,"To deposit minimum 100 rupees required").required("amount required")
     });
+
 
     async function validateForm()
     {
         try
         {
-            await userSchema.validate({sourceAccount,destinationAccount,transactionType,transactionInfo,amount},{abortEarly:false});
+            await userSchema.validate({
+                sourceAccount,transactionType,transactionInfo,amount
+            },{abortEarly:false});
             setError({});
             handleSubmit();
         }
@@ -37,7 +34,7 @@ function Transaction()
         {
             const errorMessages={};
             error.inner.forEach((e)=>{
-                errorMessages[e.path]=e.message;
+                errorMessages[e.path]=[e.message];
             });
             setError(errorMessages);
         }
@@ -45,63 +42,49 @@ function Transaction()
     
     async function handleSubmit() {
         try {
-            const response = await axios.post('http://localhost:8080/banking/findTransfer', {
+            const response = await axios.post('http://localhost:8080/banking/withdrawAmount', {
                 sourceAccount: {
                     accountNumber: sourceAccount
-                },
-                destinationAccount: {
-                    accountNumber: destinationAccount
                 },
                 transactionType,
                 transactionInfo,
                 amount,
                 transactionDate: new Date().toISOString().split('T')[0] // current date in YYYY-MM-DD format
             });
-           alert("Amount transfered Successful");
+           alert("Amount withdraw Successful");
            handleReset();
         } catch (error) {
             setError({ general: 'Error saving transaction. Please try again later.' });
         }
     }
 
+
     function handleReset()
     {
         setSourceAccount('');
-        setDestinationAccount('');
         setTransactionType('');
         setTransactionInfo('');
         setAmount('');
         setError({});
     }
-    
-    const handleLogout = () => {
-        logout();
-        navigate('/pages/Home');
-    };
 
     return(
-        <div className="container mt-5 mb-5">
+        <div className="container mt-4 mb-4">
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="card shadow-lg p-4">
-                        <h2 className="text-center mb-4">Transaction Page</h2>
+                    <h2 className="text-center mb-4">Withdraw Page</h2>
                         <form>
                         <div className='form-group mb-3'>
-                                <label htmlFor='sourceAccount' className='form-label'>Enter Source Account Number :</label>
+                                <label htmlFor='sourceAccount' className='form-label'>Enter Account Number :</label>
                                 <input type='number' className={`form-control ${error.sourceAccount ? 'is-invalid' : ''}`} id='sourceAccount' placeholder='Enter Source Account Number' value={sourceAccount} onChange={(e) => setSourceAccount(e.target.value)} />
                                 {error.sourceAccount && <div className='invalid-feedback'>{error.sourceAccount}</div>}
-                         </div>
-                         <div className='form-group mb-3'>
-                                <label htmlFor='destinationAccount' className='form-label'>Enter Destination Account Number :</label>
-                                <input type='number' className={`form-control ${error.destinationAccount ? 'is-invalid' : ''}`} id='destinationAccount' placeholder='Enter Destination Account Number' value={destinationAccount} onChange={(e) => setDestinationAccount(e.target.value)} />
-                                {error.destinationAccount && <div className='invalid-feedback'>{error.destinationAccount}</div>}
                          </div>
                          <div className='form-group mb-3'>
                                 <label htmlFor='TransactionType' className='form-label'>Transaction Type</label>
                                 <select className={`form-control ${error.transactionType ? 'is-invalid' : ''}`} id='transactionType' value={transactionType} onChange={(e) => setTransactionType(e.target.value)}>
                                     <option value=''>Select Transaction Type</option>
-                                    <option value='own account'>own Account</option>
-                                    <option value='other account'>Other Account</option>
+                                    <option value='withdraw'>Withdraw</option>
                                 </select>
                                 {error.transactionType && <div className='invalid-feedback'>{error.transactionType}</div>}
                             </div>
@@ -122,16 +105,16 @@ function Transaction()
                             </div>
                             {error.general && <div className='text-danger text-center mt-4'>{error.general}</div>}
 
-                            <div className='text-center mt-4'>
+                            {/* <div className='text-center mt-4'>
                                 <button className='btn btn-warning' onClick={handleLogout}>Logout</button>
-                            </div>
-
-                        </form>
+                            </div> */}
+                         </form>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
+
     )
 
 }
-export default Transaction;
+export default Withdraw;

@@ -84,7 +84,7 @@ function Deposit()
                                 <label htmlFor='TransactionType' className='form-label'>Transaction Type</label>
                                 <select className={`form-control ${error.transactionType ? 'is-invalid' : ''}`} id='transactionType' value={transactionType} onChange={(e) => setTransactionType(e.target.value)}>
                                     <option value=''>Select Transaction Type</option>
-                                    <option value='own account'>Deposit</option>
+                                    <option value='deposit'>Deposit</option>
                                 </select>
                                 {error.transactionType && <div className='invalid-feedback'>{error.transactionType}</div>}
                             </div>
