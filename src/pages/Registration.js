@@ -97,7 +97,7 @@ function Register() {
                         <div className="mb-3">
                             <label htmlFor="firstName" className="form-label">First Name:</label>
                             <input type="text" placeholder="Enter the First Name" className="form-control" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                            <div className="text-danger">{errors.firstName}</div>
+                            <div className="text-danger ">{errors.firstName}</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="lastName" className="form-label">Last Name:</label>

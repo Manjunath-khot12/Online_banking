@@ -1,5 +1,7 @@
 import React,{useState} from "react";
 import * as yup from 'yup';
+import axios from "axios";
+
 
 function Deposit()
 {
@@ -26,6 +28,7 @@ function Deposit()
                 sourceAccount,transactionType,transactionInfo,amount
             },{abortEarly:false});
             setError({});
+            handleSubmit();
         }
         catch(error)
         {
@@ -37,6 +40,25 @@ function Deposit()
         }
     }
     
+    async function handleSubmit() {
+        try {
+            const response = await axios.post('http://localhost:8080/banking/saveDeposit', {
+                sourceAccount: {
+                    accountNumber: sourceAccount
+                },
+                transactionType,
+                transactionInfo,
+                amount,
+                transactionDate: new Date().toISOString().split('T')[0] // current date in YYYY-MM-DD format
+            });
+           alert("Amount Deposited Successful");
+           handleReset();
+        } catch (error) {
+            setError({ general: 'Error saving transaction. Please try again later.' });
+        }
+    }
+
+
     function handleReset()
     {
         setSourceAccount('');
