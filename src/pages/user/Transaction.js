@@ -45,7 +45,7 @@ function Transaction()
     
     async function handleSubmit() {
         try {
-            const response = await axios.post('http://localhost:8080/banking/findTransfer', {
+            const response = await axios.post('http://localhost:8080/banking/fundTransfer', {
                 sourceAccount: {
                     accountNumber: sourceAccount
                 },
@@ -57,10 +57,14 @@ function Transaction()
                 amount,
                 transactionDate: new Date().toISOString().split('T')[0] // current date in YYYY-MM-DD format
             });
-           alert("Amount transfered Successful");
-           handleReset();
+            if(response.status === 200)
+            {
+                alert("Amount transfer Successful");
+                handleReset();
+            }
+           
         } catch (error) {
-            setError({ general: 'Error saving transaction. Please try again later.' });
+            setError({ general: 'Insufficient  balance. Please try again later.' });
         }
     }
 
@@ -84,7 +88,7 @@ function Transaction()
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="card shadow-lg p-4">
-                        <h2 className="text-center mb-4">Transaction Page</h2>
+                        <h2 className="text-center mb-4">Fund Transfer Page</h2>
                         <form>
                         <div className='form-group mb-3'>
                                 <label htmlFor='sourceAccount' className='form-label'>Enter Source Account Number :</label>
@@ -120,11 +124,11 @@ function Transaction()
                                 <button type='button' className='btn btn-success me-2' onClick={validateForm}>Submit</button>
                                 <button type='button' className='btn btn-secondary' onClick={handleReset}>Reset</button>
                             </div>
-                            {error.general && <div className='text-danger text-center mt-4'>{error.general}</div>}
-
+                            
                             <div className='text-center mt-4'>
                                 <button className='btn btn-warning' onClick={handleLogout}>Logout</button>
                             </div>
+                            {error.general && <div className='text-danger text-center mt-4'>{error.general}</div>}
 
                         </form>
                     </div>

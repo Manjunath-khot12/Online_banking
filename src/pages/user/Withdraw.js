@@ -16,7 +16,7 @@ function Withdraw()
         sourceAccount:yup.number().typeError("Account Number Must Be Number").integer("Account Number Must Be Integer").required("Account Number Required"),
         transactionType:yup.string().required("Transaction type required"),
         transactionInfo:yup.string().required("transaction Information required"),
-        amount:yup.number().typeError("Amount must be Number").min(100,"To deposit minimum 100 rupees required").required("amount required")
+        amount:yup.number().typeError("Amount must be Number").min(100,"To withdraw minimum 100 rupees required").required("amount required")
     });
 
 
@@ -51,10 +51,13 @@ function Withdraw()
                 amount,
                 transactionDate: new Date().toISOString().split('T')[0] // current date in YYYY-MM-DD format
             });
-           alert("Amount withdraw Successful");
-           handleReset();
+            if (response.status === 200) {
+                alert('Amount Withdraw successful'
+                );
+                handleReset();
+            }
         } catch (error) {
-            setError({ general: 'Error saving transaction. Please try again later.' });
+            setError({ general: 'insufficient Balance. Please enter amount less than balance.' });
         }
     }
 
