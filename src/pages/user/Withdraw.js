@@ -52,7 +52,7 @@ function Withdraw()
                 transactionDate: new Date().toISOString().split('T')[0] // current date in YYYY-MM-DD format
             });
             if (response.status === 200) {
-                alert('Amount Withdraw successful'
+                alert("Amount Withdrawn Successful\n\n your withdrawn details are send through your Registered Email id"
                 );
                 handleReset();
             }

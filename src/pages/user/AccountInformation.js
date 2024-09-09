@@ -3,7 +3,7 @@ import axios from "axios";
 import { FaUser, FaEnvelope, FaPhone, FaIdCard } from "react-icons/fa";
 import '../Home.css';
 
-function AccountInformation({ customerId }) {
+function AccountInformation({ accountNumber }) {
     const [accountDetails, setAccountDetails] = useState([]);
     const [error, setError] = useState("");
 
@@ -11,7 +11,7 @@ function AccountInformation({ customerId }) {
         // Fetch account details using the customerId
         async function fetchAccountDetails() {
             try {
-                const response = await axios.get(`http://localhost:8080/banking/details/${customerId}`);
+                const response = await axios.get(`http://localhost:8080/banking/details/${accountNumber}`);
                 setAccountDetails(response.data);
             } catch (err) {
                 setError("Failed to fetch account details. Please try again later.");
@@ -19,10 +19,10 @@ function AccountInformation({ customerId }) {
             }
         }
 
-        if (customerId) {
+        if (accountNumber) {
             fetchAccountDetails();
         }
-    }, [customerId]);
+    }, [accountNumber]);
 
     if (error) {
         return <div className="alert alert-danger">{error}</div>;

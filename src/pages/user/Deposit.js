@@ -51,7 +51,7 @@ function Deposit()
                 amount,
                 transactionDate: new Date().toISOString().split('T')[0] // current date in YYYY-MM-DD format
             });
-           alert("Amount Deposited Successful");
+           alert("Amount Deposited Successful\n\n your Deposit Details are send through your Registered Email Id");
            handleReset();
         } catch (error) {
             setError({ general: 'Error saving transaction. Please try again later.' });
