@@ -4,12 +4,14 @@ import './Home.css';
 import * as yup from 'yup';
 import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap'; // Optional: Bootstrap spinner
 
 function ForgotPassword() {
     const [email, setEmail] = useState('');
     const [error, setError] = useState({});
     const [firstName, setFirstName] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false); // New loading state
     const navigate = useNavigate();
 
     const userSchema = yup.object().shape({
@@ -31,14 +33,14 @@ function ForgotPassword() {
     }
 
     async function handleSubmit() {
+        setLoading(true);  // Start loading spinner
         try {
             const response = await axios.post('http://localhost:8080/banking/forgotpassword', { email });
             if (response.status === 200) {
                 const data = response.data;
                 setFirstName(data.firstName);
                 setEmail(data.email);
-                // setPassword(data.password);
-                alert(`Hi, ${data.firstName}\n\nYour Password is send to your Registered Email id : ${data.email}`);
+                alert(`Hi, ${data.firstName}\n\nYour Password has been sent to your registered email: ${data.email}`);
                 navigate('/pages/login');
             } else {
                 setError({ general: "Invalid Credentials" });
@@ -46,6 +48,8 @@ function ForgotPassword() {
         } catch (error) {
             console.error("Error response:", error.response); 
             setError({ general: 'Error in getting password, Please try again' });
+        } finally {
+            setLoading(false); // Stop loading spinner
         }
     }
 
@@ -56,7 +60,7 @@ function ForgotPassword() {
 
     return (
         <div className="container-fluid d-flex justify-content-center mt-5">
-            <div className="row shadow-lg  justify-content-center">
+            <div className="row shadow-lg justify-content-center">
                 <p id="Registration-heading" className='mt-4'>Forgot Password</p>
                 <div className="col-md-10">
                     <form autoComplete="off">
@@ -68,13 +72,38 @@ function ForgotPassword() {
                                 value={email}
                                 className="form-control"
                                 placeholder="Enter the Email id"
-                                autoComplete="off"  // Disable autocomplete
+                                autoComplete="off"
                                 onChange={(e) => setEmail(e.target.value)}
+                                disabled={loading} // Disable input during loading
                             />
                             <div className="text-danger">{error.email}</div>
                         </div>
-                        <button type="button" className="btn res-btn1 p-2 btn-success mt-3" onClick={validateForm}>Submit</button>
-                        <button type="button" className="btn res-btn2 p-2 btn-primary mt-3" onClick={handleReset}>Reset</button>
+                        <button
+                            type="button"
+                            className="btn res-btn1 p-2 btn-success mt-3"
+                            onClick={validateForm}
+                            disabled={loading} // Disable button during loading
+                        >
+                            Submit
+                        </button>
+                        <button
+                            type="button"
+                            className="btn res-btn2 p-2 btn-primary mt-3"
+                            onClick={handleReset}
+                            disabled={loading} // Disable button during loading
+                        >
+                            Reset
+                        </button>
+
+                        {/* Conditionally show the spinner while loading */}
+                        {loading && (
+                            <div className="text-center mt-4 mb-4">
+                                <Spinner animation="border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </Spinner>
+                            </div>
+                        )}
+
                         <div className="text-danger fs-5 text-center mt-4 mb-5">{error.general}</div>
                     </form>
                 </div>

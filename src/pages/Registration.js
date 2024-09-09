@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom';
-
+import { Spinner } from 'react-bootstrap';
 
 function Register() {
     const [firstName, setFirstName] = useState('');
@@ -15,9 +15,9 @@ function Register() {
     const [password, setPassword] = useState('');
     const [address, setAddress] = useState('');
     const [gender, setGender] = useState('');
-    const [createdDate,setCreatedDate]=useState('');
+    const [createdDate, setCreatedDate] = useState('');
     const [errors, setErrors] = useState({});
-
+    const [loading, setLoading] = useState(false); // New state for loading
 
     const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ function Register() {
 
     async function validateForm() {
         try {
-            await userSchema.validate({ firstName, lastName, phoneNumber, age, email, password, address, gender , createdDate }, { abortEarly: false });
+            await userSchema.validate({ firstName, lastName, phoneNumber, age, email, password, address, gender, createdDate }, { abortEarly: false });
             setErrors({});
             handleSubmit();
         } catch (error) {
@@ -47,7 +47,8 @@ function Register() {
     }
 
     async function handleSubmit() {
-        console.log("Submitting data:", { firstName, lastName, phoneNumber, age, email, password, address, gender,createdDate });
+        console.log("Submitting data:", { firstName, lastName, phoneNumber, age, email, password, address, gender, createdDate });
+        setLoading(true); // Show the spinner before making the request
         try {
             const response = await axios.post('http://localhost:8080/banking/register', {
                 firstName: firstName,
@@ -58,40 +59,38 @@ function Register() {
                 age: age,
                 address: address,
                 gender: gender,
-                createdDate:createdDate
+                createdDate: createdDate
             });
 
             if (response.status === 200) {
-                alert("Registration Successful\n\n"+
-                       "Your Login Details will be send through your Registered email id");
+                alert("Registration Successful\n\n" +
+                    "Your Login Details will be sent through your Registered email id");
                 navigate('/pages/login');
             }
         } catch (error) {
             console.error("Registration error:", error);
             setErrors({ general: 'Already have Account.' });
+        } finally {
+            setLoading(false); // Hide the spinner after the request is completed
         }
     }
-    
-   
 
-   function handleReset()
-   {
+    function handleReset() {
         setFirstName('');
         setLastName('');
         setPhoneNumber('');
         setEmail('');
-         setPassword('');
-         setAge('');
-         setAddress('');
-         setGender('');
-         setErrors({});
-   }
-
+        setPassword('');
+        setAge('');
+        setAddress('');
+        setGender('');
+        setErrors({});
+    }
 
     return (
         <div className="container-fluid d-flex justify-content-center  p-5 mb-5">
-            <div className="row shadow-lg   justify-content-center">
-            <p id="Registration-heading">Registration Page</p>
+            <div className="row shadow-lg justify-content-center">
+                <p id="Registration-heading">Registration Page</p>
                 <div className="col-md-10">
                     <form>
                         <div className="mb-3">
@@ -111,7 +110,7 @@ function Register() {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email:</label>
-                            <input type="text" placeholder="Enter the Email Address" className="form-control" id="email" value={email} onChange={(e) =>setEmail(e.target.value)} />
+                            <input type="text" placeholder="Enter the Email Address" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                             <div className="text-danger">{errors.email}</div>
                         </div>
                         <div className="mb-3">
@@ -139,13 +138,23 @@ function Register() {
                             </select>
                             <div className="text-danger">{errors.gender}</div>
                         </div>
-                        <button type="button" className="btn res-btn1 p-2 btn-success mt-3" onClick={validateForm}>Submit</button>
-                        <button type="button" className="btn res-btn2 p-2 btn-primary mt-3" onClick={handleReset}>Reset</button>
+
+                        {/* Display Loading Spinner while submitting */}
+                        {loading && <div className="d-flex justify-content-center my-3">
+                            <Spinner animation="border" variant="primary" />
+                        </div>}
+
+                        <button type="button" className="btn res-btn1 p-2 btn-success mt-3" onClick={validateForm} disabled={loading}>
+                            Submit
+                        </button>
+                        <button type="button" className="btn res-btn2 p-2 btn-primary mt-3" onClick={handleReset} disabled={loading}>
+                            Reset
+                        </button>
+
                         <div className="text-danger fs-5 text-center mt-4">{errors.general}</div>
-                        
                     </form>
                     <div className="mt-4 mb-5 fs-5 text-center">
-                        <Link  className="text-center" to="/pages/login">Already Register?Login Here</Link>
+                        <Link className="text-center" to="/pages/login">Already Registered? Login Here</Link>
                     </div>
                 </div>
             </div>
