@@ -28,7 +28,7 @@ const UserNavbar = () => {
                             </div>
                         )}
                     </li>
-                    <li><Link className='link' to="/">Trans-History</Link></li>
+                    <li><Link className='link' to="/pages/user/TransactionHistory">Trans-History</Link></li>
                     <li><Link className='link' to="/">Pay-Bill</Link></li>
                     <li><Link className='link' to="/">Bank-Stat</Link></li>    
                 </ul>

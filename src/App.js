@@ -13,6 +13,7 @@ import AccountDetails from './pages/user/AccountDetials';
 import Transaction from './pages/user/Transaction';
 import Deposit from './pages/user/Deposit';
 import Withdraw from './pages/user/Withdraw';
+import TransactionHistory from './pages/user/TransactionHistory';
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
@@ -36,6 +37,7 @@ function AppContent() {
             <Route path="/pages/user/Transaction" element={<Transaction />} />
             <Route path="/pages/user/Deposit" element={<Deposit />} />
             <Route path="/pages/user/Withdraw" element={<Withdraw />} />
+            <Route path="/pages/user/TransactionHistory" element={<TransactionHistory />} />
           </>
         )}
   
