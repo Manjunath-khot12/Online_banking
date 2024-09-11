@@ -107,8 +107,12 @@ function Transaction() {
                                 {error.transactionType && <div className='invalid-feedback'>{error.transactionType}</div>}
                             </div>
                             <div className='form-group mb-3'>
-                                <label htmlFor='transactionInfo' className='form-label'>Enter Transaction Information :</label>
-                                <input type='text' className={`form-control ${error.transactionInfo ? 'is-invalid' : ''}`} id='transactionInfo' placeholder='Enter Transaction Information' value={transactionInfo} onChange={(e) => setTransactionInfo(e.target.value)} />
+                                <label htmlFor='transactionInfo' className='form-label'>Transaction Info</label>
+                                <select className={`form-control ${error.transactionInfo ? 'is-invalid' : ''}`} id='transactionType' value={transactionInfo} onChange={(e) => setTransactionInfo(e.target.value)}>
+                                    <option value=''>Select Transaction Information</option>
+                                    <option value='Fund Transfer between own accounts'>Fund Transfer between own accounts</option>
+                                    <option value='Fund Transfer between other accounts'>Fund Transfer between other accounts</option>
+                                </select>
                                 {error.transactionInfo && <div className='invalid-feedback'>{error.transactionInfo}</div>}
                             </div>
                             <div className='form-group mb-3'>

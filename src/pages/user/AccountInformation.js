@@ -53,6 +53,7 @@ function AccountInformation({ accountNumber }) {
                         <div className="mb-3">
                             <p className="fs-5"><FaEnvelope /> Email ID: <span className="fs-6 text-primary">{email}</span></p>
                         </div>
+                        
                     )}
                     {phoneNumber && (
                         <div className="mb-3">
