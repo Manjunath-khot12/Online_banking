@@ -13,7 +13,7 @@ const UserNavbar = () => {
 
     return (
         <>
-            <nav className='navbar'>
+            <nav className='navbar nav-position d-flex justify-content-center'>
                 <ul className='nav-links'>
                     <img src='../../images/bank-icon-logo.jpg' alt='logo' id='logo'></img>
                     <li><Link className='link' to="/pages/user/CreateAccount">Create-Acc</Link></li>
@@ -30,7 +30,8 @@ const UserNavbar = () => {
                     </li>
                     <li><Link className='link' to="/pages/user/TransactionHistory">Trans-History</Link></li>
                     <li><Link className='link' to="/">Pay-Bill</Link></li>
-                    <li><Link className='link' to="/">Bank-Stat</Link></li>    
+                    <li><Link className='link' to="/pages/user/BillStatement">Bank-Stat</Link></li> 
+                    <li><Link className='link' to="/pages/user/BillStatement">User Profile</Link></li>    
                 </ul>
             </nav>
             <Outlet />

@@ -9,7 +9,7 @@ import '../../pages/Home.css';
 const MainNavbar = () => {
     return (
         <>
-            <nav className='navbar nav-position '>
+            <nav className='navbar nav-position d-flex justify-content-center '>
                 <ul className='nav-links'>
                     <img src='../../images/bank-icon-logo.jpg' alt='logo' id='logo'></img>
                     <li><Link className='link' to="/pages/Home">Home</Link></li>
