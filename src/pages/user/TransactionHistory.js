@@ -57,9 +57,9 @@ function TransactionHistory()
     return(
         <div className="container mt-5">
             <div className="row justify-content-center">
-                <div className="col-lg-12">
+                <div className="col-lg-9">
                     <div className="card shadow-lg p-4">
-                        <h2 className="text-center mb-4">Transaction History</h2>
+                        <h2 className="text-center mb-4 text-bg-secondary">Transaction History</h2>
                         <form>
                         <div className='form-group mb-3'>
                                 <label htmlFor='accountNumber' className='form-label'>Enter Account Number</label>
@@ -76,14 +76,14 @@ function TransactionHistory()
                     </div>
                         
                         </form> 
-                        {showTransactionInfo && (
+                    </div>
+                </div>
+            </div>
+            {showTransactionInfo && (
                     <div className="mt-5">
                         <TransactionInformation accountNumber={accountNumber} />
                     </div>
                 )}
-                    </div>
-                </div>
-            </div>
         </div>
     )
 }
