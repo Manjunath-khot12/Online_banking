@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaUser, FaEnvelope, FaPhone, FaIdCard,FaVenusMars,FaBirthdayCake, FaHome } from "react-icons/fa";
 import '../Home.css';
+import { useNavigate, Link } from 'react-router-dom';
+import UpdateUser from "./UpdateUser";
+
 
 function UserInformation({ customerId }) {
     const [userDetails, setUserDetails] = useState([]);
@@ -29,7 +32,7 @@ function UserInformation({ customerId }) {
     }
 
     if (!userDetails.length) {
-        return <div className="text-danger text-center mt-4">You don't have any accounts.</div>;
+        return <div className="alert alert-danger text-center mt-4">You don't have any accounts.</div>;
     }
      
     const customerID = userDetails.length > 0 ? userDetails[0].customerID: '';
@@ -51,9 +54,9 @@ function UserInformation({ customerId }) {
                     <h2 className="mb-0 text-center">User Profile</h2>
                 </div>
                 <div className="card-body ml-5">
-                {customerID && (
+                {customerId && (
                         <div className="mb-3">
-                            <p className="fs-5"><FaIdCard /> Customer ID NUmber : <span className="fs-6 text-primary">{customerID}</span></p>
+                            <p className="fs-5"><FaIdCard /> Customer ID NUmber : <span className="fs-6 text-primary">{customerId}</span></p>
                         </div>
                     )}
 
@@ -101,6 +104,7 @@ function UserInformation({ customerId }) {
                     )}
                     
                     <div className="table-responsive mt-5 mb-5">
+                    <h2 className="mb-0 text-center bg-secondary text-white">Account Details</h2>
                         <table className="table table-striped table-hover table-bordered mt-3">   
                             <thead className="bg-light">
                                 <tr className="text-center">
@@ -119,6 +123,11 @@ function UserInformation({ customerId }) {
                                 ))}
                             </tbody>
                         </table>
+                    </div>
+                    <div className="mt-2 mb-5 text-center">
+                        <Link to={`/UpdateUser/${customerId}`}>
+                         <button className="btn btn-outline-success bg-success text-white fs-5">Update Profile</button>
+                        </Link>
                     </div>
                 </div>
             </div>
