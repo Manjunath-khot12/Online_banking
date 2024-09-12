@@ -59,7 +59,7 @@ function CreateAccount() {
         } catch (error) {
             console.error("Account creation error:", error);
             setError({ general: 'Account creation failed, try again.' });
-            alert("Account creation failed. Please check the console for more details.");
+            alert("Account creation failed. Please check your details details.");
         } finally {
             setLoading(false);
         }

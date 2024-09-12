@@ -43,7 +43,7 @@ function TransactionInformation({ accountNumber }) {
                                 <tr className="text-center">
                                     <th>Transaction ID</th>
                                     <th>Transaction Date</th>
-                                    <th>Transaction Info</th>
+                                    <th>Transaction Description</th>
                                     <th>From Account</th>
                                     <th>To Account</th>
                                     <th>Amount</th>

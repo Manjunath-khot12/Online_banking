@@ -46,7 +46,7 @@ function AccountDetails() {
     return (
         <div className="container-fluid mt-5 d-flex justify-content-center align-items-center">
             <div className="card shadow-lg p-4 mb-5 bg-body rounded" style={{ width: '100%', maxWidth: '1000px' }}>
-                <h2 className="text-center mb-4">Account Details</h2>
+                <h2 className="text-center mb-4 text-bg-secondary">Account Details</h2>
                 <form autoComplete="off" >
                     <div className="mb-4">
                         <label htmlFor="accountNumber" className="form-label">Enter Account Number</label>
