@@ -43,7 +43,7 @@ function AppContent() {
             <Route path="/pages/user/TransactionHistory" element={<TransactionHistory />} />
             <Route path="/pages/user/BillStatement" element={<BillStatement />} />
             <Route path="/pages/user/UserProfile" element={<UserProfile />} />
-            <Route path="/pages/user/UpdateUser/:customerId" element={<UpdateUser />} />
+            <Route path="/pages/user/UpdateUser/:customerId/:firstName/:lastName/:gender/:age/:adharaNumber/:panNumber" element={<UpdateUser />} />
           </>
         )}
   

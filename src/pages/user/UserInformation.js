@@ -3,7 +3,7 @@ import axios from "axios";
 import { FaUser, FaEnvelope, FaPhone, FaIdCard,FaVenusMars,FaBirthdayCake, FaHome } from "react-icons/fa";
 import '../Home.css';
 import { useNavigate, Link } from 'react-router-dom';
-import UpdateUser from "./UpdateUser";
+import UpdateUser from './UpdateUser';
 
 
 function UserInformation({ customerId }) {
@@ -124,10 +124,9 @@ function UserInformation({ customerId }) {
                             </tbody>
                         </table>
                     </div>
-                    <div className="mt-2 mb-5 text-center">
-                        <Link to={`/UpdateUser/${customerId}`}>
-                         <button className="btn btn-outline-success bg-success text-white fs-5">Update Profile</button>
-                        </Link>
+                    <div className="mt-2 mb-5 fs-5 text-center">
+                     <Link   to={`/pages/user/UpdateUser/${customerId}/${firstName}/${lastName}/${gender}/${age}/${adharaNumber}/${panNumber}`}  className="btn btn-primary"> Update Profile
+                     </Link>
                     </div>
                 </div>
             </div>
