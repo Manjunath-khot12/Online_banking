@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import '../Home.css';
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 function TransactionInformation({ accountNumber }) {
     const [transactionInformation, setTransactionInformation] = useState([]);
@@ -22,6 +24,31 @@ function TransactionInformation({ accountNumber }) {
         }
     }, [accountNumber]);
 
+    const downloadPDF = () => {
+        const input = document.getElementById('transaction-table');
+
+        html2canvas(input).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF();
+            const imgWidth = 210; // A4 width in mm
+            const pageHeight = 295; // A4 height in mm
+            const imgHeight = canvas.height * imgWidth / canvas.width;
+            let heightLeft = imgHeight;
+
+            let position = 0;
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+            pdf.save("transaction-information.pdf");
+        });
+    };
+
     if (error) {
         return <div className="alert alert-danger">{error}</div>;
     }
@@ -37,8 +64,9 @@ function TransactionInformation({ accountNumber }) {
                     <h2 className="mb-0 text-center">Transaction Information</h2>
                 </div>
                 <div className="card-body">
+                   
                     <div className="table-responsive mt-5 mb-5">
-                        <table className="table table-striped table-hover table-bordered mt-3">
+                        <table id="transaction-table" className="table table-striped table-hover table-bordered mt-3">
                             <thead className="bg-light">
                                 <tr className="text-center">
                                     <th>Transaction ID</th>
@@ -52,16 +80,19 @@ function TransactionInformation({ accountNumber }) {
                             <tbody>
                                 {transactionInformation.map((transaction, index) => (
                                     <tr key={index} className="text-center">
-                                        <td>{transaction[0] || 'N/A'}</td>
-                                        <td>{transaction[2] || 'N/A'}</td>
-                                        <td>{transaction[3] || 'N/A'}</td>
-                                        <td>{transaction[6] || 'N/A'}</td>
-                                        <td>{transaction[5] || 'N/A'}</td>
+                                        <td>{transaction[0] || ''}</td>
+                                        <td>{transaction[2] || ''}</td>
+                                        <td>{transaction[3] || ''}</td>
+                                        <td>{transaction[6] || ''}</td>
+                                        <td>{transaction[5] || ''}</td>
                                         <td>₹ {transaction[1] !== undefined ? Number(transaction[1]).toLocaleString() : 'N/A'}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
+                    </div>
+                     <div className="d-flex justify-content-center mb-3">
+                        <button className="btn btn-primary " onClick={downloadPDF}>Download as PDF</button>
                     </div>
                 </div>
             </div>

@@ -8,23 +8,22 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
 
 function Login() {
-    const [email, setEmail] = useState('');
+    const [customerId, setCustomerId] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
-    const [customerID, setCustomerId] = useState('');
     const [errors, setError] = useState({});
     const [loading, setLoading] = useState(false); // New state for loading
     const { login } = useAuth();
     const navigate = useNavigate();
 
     const userSchema = yup.object().shape({
-        email: yup.string().email("Invalid Email").required("Email is required"),
+        customerId: yup.number().typeError("Customer id must be a number").integer("customerId must be integer").required("Email is required"),
         password: yup.string().required("Password is required")
     });
 
     async function validateForm() {
         try {
-            await userSchema.validate({ email, password }, { abortEarly: false });
+            await userSchema.validate({ customerId, password }, { abortEarly: false });
             setError({});
             return true; // Return true if validation passes
         } catch (error) {
@@ -41,7 +40,7 @@ function Login() {
         event.preventDefault();
         const isValid = await validateForm();
 
-        if (!email) {
+        if (!customerId) {
             setError({ global: 'Email cannot be empty' });
             return;
         }
@@ -49,14 +48,14 @@ function Login() {
         if (isValid) {
             setLoading(true); // Show the spinner before making the request
             try {
-                const response = await axios.post('http://localhost:8080/banking/login', { email, password });
+                const response = await axios.post('http://localhost:8080/banking/login', { id: customerId, password });
                 if (response.status === 200) {
                     const data = response.data;
                     setFirstName(data.firstName);
-                    setCustomerId(data.customerID);
-                    alert(`Welcome, ${data.firstName}\nCustomer ID is: ${data.customerID}`);
+                    setCustomerId(data.customerId);
+                    alert(`Welcome, ${data.firstName}`);
                     login(); // Set authentication state
-                    navigate('/pages/user/UserHome', { state: { firstName: data.firstName, customerId: data.customerID } });
+                    navigate('/pages/user/UserHome', { state: { firstName: data.firstName, customerId: data.customerId } });
                 } else {
                     setError({ global: "Invalid Credentials" });
                 }
@@ -75,17 +74,17 @@ function Login() {
                 <div className="col-md-10">
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <div className="mb-5">
-                            <label htmlFor="username" className="form-label">Username:</label>
+                            <label htmlFor="username" className="form-label">Enter Customer Id:</label>
                             <input
                                 type="text"
-                                placeholder="Enter the Email"
+                                placeholder="Enter the Customer Id"
                                 className="form-control"
                                 id="username"
                                 autoComplete="off"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={customerId}
+                                onChange={(e) => setCustomerId(e.target.value)}
                             />
-                            <div className="text-danger">{errors.email}</div>
+                            <div className="text-danger">{errors.customerId}</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Password:</label>
@@ -112,7 +111,7 @@ function Login() {
                         <button type="submit" className="btn login-btn1 btn-primary mt-3" disabled={loading}>
                             Login
                         </button>
-                        <button type="button" className="btn login-btn2 btn-primary mt-3" onClick={() => { setEmail(''); setPassword(''); setError({}); }} disabled={loading}>
+                        <button type="button" className="btn login-btn2 btn-primary mt-3" onClick={() => { setCustomerId(''); setPassword(''); setError({}); }} disabled={loading}>
                             Reset
                         </button>
                         <div className="mt-4 fs-5 text-center">

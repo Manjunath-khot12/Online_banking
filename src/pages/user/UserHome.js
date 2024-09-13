@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -23,9 +24,6 @@ function UserHome() {
                 <h1 className="welcome-text">
                     Welcome, <span className="highlighted-text">{firstName}</span>
                 </h1>
-                <p className="info-text">
-                    Your Customer ID is: <span className="customer-id">{customerId}</span>
-                </p>
                 <button className="btn logout-btn" onClick={handleLogout}>Logout</button>
             </div>
         </div>

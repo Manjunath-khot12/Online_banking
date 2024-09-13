@@ -6,9 +6,13 @@ import Deposit from '../../pages/user/Deposit';
 
 const UserNavbar = () => {
     const [showDropdown, setShowDropdown] = useState(false);
+    const [showDropdownb, setShowDropdownb] = useState(false);
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
+    };
+    const toggleDropdownb = () => {
+        setShowDropdownb(!showDropdownb);
     };
 
     return (
@@ -28,8 +32,17 @@ const UserNavbar = () => {
                             </div>
                         )}
                     </li>
+                
+                    <li className='dropdown'>
+                        <button className='dropbtn link' onClick={toggleDropdownb}>Pay-Bills</button>
+                        {showDropdownb && (
+                            <div className='dropdown-content'>
+                                <Link className='link' onClick={toggleDropdownb} to="/">Add Bills</Link>
+                                <Link className='link' onClick={toggleDropdownb}  to="/">view Bills</Link>
+                            </div>
+                        )}
+                    </li>
                     <li><Link className='link' to="/pages/user/TransactionHistory">Trans-History</Link></li>
-                    <li><Link className='link' to="/">Pay-Bill</Link></li>
                     <li><Link className='link' to="/pages/user/BillStatement">Bank-Stat</Link></li> 
                     <li><Link className='link' to="/pages/user/UserProfile">User Profile</Link></li> 
                     <li><Link className='link' to="/pages/user/UpdateUser"></Link></li>     
