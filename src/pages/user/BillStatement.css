@@ -1,0 +1,41 @@
+/* BillStatement.css */
+
+
+.card {
+    border-radius: 8px;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+h2 {
+    color: #343a40;
+}
+
+.form-control {
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    border-radius: 5px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.text-danger {
+    font-size: 0.875rem;
+}
