@@ -53,7 +53,7 @@ function Login() {
                     const data = response.data;
                     setFirstName(data.firstName);
                     setCustomerId(data.customerId);
-                    alert(`Welcome, ${data.firstName}`);
+                    alert(`Welcome, ${data.firstName}\ncustomer id,${customerId}`);
                     login(); // Set authentication state
                     navigate('/pages/user/UserHome', { state: { firstName: data.firstName, customerId: data.customerId } });
                 } else {
