@@ -17,6 +17,8 @@ import TransactionHistory from './pages/user/TransactionHistory';
 import BillStatement from './pages/user/BillStatement';
 import UserProfile from './pages/user/UserProfile';
 import UpdateUser from './pages/user/UpdateUser';
+import AddBiller from './pages/user/AddBiller';
+import ViewBills from './pages/user/ViewBills';
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
@@ -44,6 +46,8 @@ function AppContent() {
             <Route path="/pages/user/BillStatement" element={<BillStatement />} />
             <Route path="/pages/user/UserProfile" element={<UserProfile />} />
             <Route path="/pages/user/UpdateUser/:customerId/:firstName/:lastName/:gender/:age/:adharaNumber/:panNumber" element={<UpdateUser />} />
+            <Route path="/pages/user/AddBiller" element={<AddBiller />} />
+            <Route path="/pages/user/ViewBills" element={<ViewBills/>}/>
           </>
         )}
   

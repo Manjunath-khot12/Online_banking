@@ -84,7 +84,7 @@ function CreateAccount() {
             <div className='row justify-content-center'>
                 <div className='col-lg-8'>
                     <div className='card shadow-lg p-4'>
-                        <h2 className='text-center mb-4 text-bg-secondary'>Create Account</h2>
+                        <h2 className='text-center mb-4 '>Create Account</h2>
                         <form autoComplete="off">
                             <div className='form-group mb-3'>
                                 <label htmlFor='customerId' className='form-label'>Customer ID</label>

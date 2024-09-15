@@ -85,7 +85,7 @@ function Transaction() {
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="card shadow-lg p-4">
-                        <h2 className="text-center mb-4 text-bg-secondary">Fund Transfer Page</h2>
+                        <h2 className="text-center mb-4">Fund Transfer Page</h2>
                         <form>
                             <div className='form-group mb-3'>
                                 <label htmlFor='sourceAccount' className='form-label'>Enter Source Account Number :</label>

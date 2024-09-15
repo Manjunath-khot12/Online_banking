@@ -37,8 +37,8 @@ const UserNavbar = () => {
                         <button className='dropbtn link' onClick={toggleDropdownb}>Pay-Bills</button>
                         {showDropdownb && (
                             <div className='dropdown-content'>
-                                <Link className='link' onClick={toggleDropdownb} to="/">Add Bills</Link>
-                                <Link className='link' onClick={toggleDropdownb}  to="/">view Bills</Link>
+                                <Link className='link' onClick={toggleDropdownb} to="/pages/user/AddBiller">Add Bills</Link>
+                                <Link className='link' onClick={toggleDropdownb}  to="/pages/user/ViewBills">view Bills</Link>
                             </div>
                         )}
                     </li>

@@ -48,7 +48,7 @@ function AccountDetails() {
         <div className="row justify-content-center">
             <div className="col-lg-9">
                 <div className="card shadow-lg p-4">
-                    <h2 className="text-center mt-4 mb-4 text-bg-secondary">User Profile</h2>
+                    <h2 className="text-center mt-4 mb-4">User Profile</h2>
                     <form>
                     <div className='form-group mb-3'>
                             <label htmlFor='customerId' className='form-label'>Enter Customer ID : </label>

@@ -66,7 +66,7 @@ function Deposit() {
             <div className="row justify-content-center">
                 <div className="col-lg-8">
                     <div className="card shadow-lg p-4">
-                        <h2 className="text-center mb-4 text-bg-secondary">Deposit Page</h2>
+                        <h2 className="text-center mb-4">Deposit Page</h2>
                         <form>
                             <div className='form-group mb-3'>
                                 <label htmlFor='sourceAccount' className='form-label'>Enter Account Number :</label>
