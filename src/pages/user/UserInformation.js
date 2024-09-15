@@ -49,7 +49,7 @@ function UserInformation({ customerId }) {
 
     return (
         <div className="container-fluid mt-4">
-            <div className="card shadow-lg border-0 mb-4">
+            <div className="card  border-0 mb-4">
                 <div className="card-header bg-success text-white">
                     <h2 className="mb-0 text-center">User Profile</h2>
                 </div>

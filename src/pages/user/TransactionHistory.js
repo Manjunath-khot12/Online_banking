@@ -58,7 +58,7 @@ function TransactionHistory()
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-lg-9">
-                    <div className="card shadow-lg p-4">
+                    <div className="card  p-4">
                         <h2 className="text-center mb-4">Transaction History</h2>
                         <form>
                         <div className='form-group mb-3'>

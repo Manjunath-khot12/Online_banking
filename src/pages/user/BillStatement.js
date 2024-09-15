@@ -65,7 +65,7 @@ function BillStatement() {
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-lg-8">
-                    <Card className="shadow-lg p-4 bg-white">
+                    <Card className="card p-4 bg-white">
                         <Card.Body>
                             <h2 className="text-center mb-4">Bank Statement</h2>
                             <Form>

@@ -101,7 +101,7 @@ function UpdateUser() {
 
     return (
         <div className="container-fluid d-flex justify-content-center  p-5 mb-5">
-            <div className="row shadow-lg justify-content-center">
+            <div className="row  justify-content-center">
                     <h2 className="text-center mb-5 mt-3">Update Profile</h2>
                 <div className="col-md-10">
                     <form>

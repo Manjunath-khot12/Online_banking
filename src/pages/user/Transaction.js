@@ -105,7 +105,7 @@ function Transaction() {
         <div className="container mt-5 mb-5">
             <div className="row justify-content-center">
                 <div className="col-lg-8">
-                    <div className="card shadow-lg p-4">
+                    <div className="card  p-4">
                         <h2 className="text-center mb-4">Fund Transfer Page</h2>
                         <form>
                             <div className='form-group mb-3'>
