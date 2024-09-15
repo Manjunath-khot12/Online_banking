@@ -8,7 +8,7 @@ function AccountInformation({ accountNumber }) {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        // Fetch account details using the customerId
+        // Fetch account details using the accountNumber
         async function fetchAccountDetails() {
             try {
                 const response = await axios.get(`http://localhost:8080/banking/details/${accountNumber}`);
@@ -29,45 +29,42 @@ function AccountInformation({ accountNumber }) {
     }
 
     if (!accountDetails.length) {
-        return <div className="  alert alert-danger text-center mt-4">You don't have any accounts.</div>;
+        return <div className="alert alert-danger text-center mt-4">You don't have any accounts.</div>;
     }
 
-    const firstName = accountDetails.length > 0 ? accountDetails[0].firstName : '';
-    const adharaNumber = accountDetails.length > 0 ? accountDetails[0].adharaNumber : '';
-    const email = accountDetails.length > 0 ? accountDetails[0].email : '';
-    const phoneNumber = accountDetails.length > 0 ? accountDetails[0].phoneNumber : '';
+    const account = accountDetails[0]; // Assuming accountDetails array has at least one element
 
     return (
         <div className="container-fluid mt-4">
-            <div className="card  border-0 mb-4">
+            <div className="card border-1 mb-4">
                 <div className="card-header bg-primary text-white">
-                    <h2 className="mb-0 text-center">Account Information</h2>
+                    <h2 className="mb-0 text-center text-dark">Account Information</h2>
                 </div>
-                <div className="card-body">
-                    {firstName && (
+                <div className="card-body" style={{ textAlign: 'left' }}>
+                    {account.firstName && (
                         <div className="mb-3">
-                            <p className="fs-5"><FaUser /> Customer Name: <span className="fs-6 text-primary">{firstName}</span></p>
+                            <p className="fs-5"><FaUser /> Customer Name: <span className="fs-6 text-primary">{account.firstName}</span></p>
                         </div>
                     )}
-                    {email && (
+                    {account.email && (
                         <div className="mb-3">
-                            <p className="fs-5"><FaEnvelope /> Email ID: <span className="fs-6 text-primary">{email}</span></p>
+                            <p className="fs-5"><FaEnvelope /> Email ID: <span className="fs-6 text-primary">{account.email}</span></p>
                         </div>
-                        
                     )}
-                    {phoneNumber && (
+                    {account.phoneNumber && (
                         <div className="mb-3">
-                            <p className="fs-5"><FaPhone /> Phone Number: <span className="fs-6 text-primary">{phoneNumber}</span></p>
+                            <p className="fs-5"><FaPhone /> Phone Number: <span className="fs-6 text-primary">{account.phoneNumber}</span></p>
                         </div>
                     )}
-                    {adharaNumber && (
-                        <div className="mb-1">
-                            <p className="fs-5"><FaIdCard /> Aadhar Card Number: <span className="fs-6 text-primary">{adharaNumber}</span></p>
+                    {account.adharaNumber && (
+                        <div className="mb-3">
+                            <p className="fs-5"><FaIdCard /> Aadhar Card Number: <span className="fs-6 text-primary">{account.adharaNumber}</span></p>
                         </div>
                     )}
-                    
+
                     <div className="table-responsive mt-5 mb-5">
-                        <table className="table table-striped table-hover table-bordered mt-3">   
+                        <h2 className="mb-0 text-center bg-secondary text-white">Account Details</h2>
+                        <table className="table table-striped table-hover table-bordered mt-3">
                             <thead className="bg-light">
                                 <tr className="text-center">
                                     <th>Account Number</th>
@@ -77,12 +74,12 @@ function AccountInformation({ accountNumber }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {accountDetails.map((account, index) => (
+                                {accountDetails.map((acc, index) => (
                                     <tr key={index} className="text-center">
-                                        <td>{account.accountNumber}</td>
-                                        <td>{account.accountType}</td>
-                                        <td>₹ {account.initialDeposit.toLocaleString()}</td>
-                                        <td>{account.createdDate}</td>
+                                        <td>{acc.accountNumber}</td>
+                                        <td>{acc.accountType}</td>
+                                        <td>₹ {acc.initialDeposit.toLocaleString()}</td>
+                                        <td>{acc.createdDate}</td>
                                     </tr>
                                 ))}
                             </tbody>

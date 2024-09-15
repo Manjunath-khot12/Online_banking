@@ -59,7 +59,7 @@ function TransactionInformation({ accountNumber }) {
 
     return (
         <div className="container-fluid mt-4">
-            <div id="transaction-table" className="card border-0 mb-4">
+            <div id="transaction-table" className="card border-2 mb-4">
                 <div className="card-header bg-primary text-white">
                     <h2 className="mb-0 text-center text-dark">Transaction Information</h2>
                 </div>

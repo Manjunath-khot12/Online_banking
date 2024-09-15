@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaUser, FaEnvelope, FaPhone, FaIdCard,FaVenusMars,FaBirthdayCake, FaHome } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaPhone, FaIdCard, FaVenusMars, FaBirthdayCake, FaHome } from "react-icons/fa";
 import '../Home.css';
-import { useNavigate, Link } from 'react-router-dom';
-import UpdateUser from './UpdateUser';
-
+import { Link } from 'react-router-dom';
 
 function UserInformation({ customerId }) {
     const [userDetails, setUserDetails] = useState([]);
@@ -34,78 +32,73 @@ function UserInformation({ customerId }) {
     if (!userDetails.length) {
         return <div className="alert alert-danger text-center mt-4">You don't have any accounts.</div>;
     }
-     
-    const customerID = userDetails.length > 0 ? userDetails[0].customerID: '';
-     const firstName = userDetails.length > 0 ? userDetails[0].firstName: '';
-     const lastName = userDetails.length > 0 ? userDetails[0].lastName:'';
-     const email = userDetails.length > 0 ? userDetails[0].email:'';
-     const phoneNumber = userDetails.length > 0 ? userDetails[0].phoneNumber:'';
-     const gender = userDetails.length > 0 ? userDetails[0].gender:'';
-     const age = userDetails.length > 0 ? userDetails[0].age: '';
-     const address = userDetails.length > 0 ? userDetails[0].address : '';
-     const adharaNumber = userDetails.length > 0 ? userDetails[0].adharaNumber:'';
-     const panNumber=userDetails.length > 0 ? userDetails[0].panNumber:'';
- 
+
+    const user = userDetails[0]; // Assuming userDetails array has at least one element
 
     return (
         <div className="container-fluid mt-4">
-            <div className="card  border-0 mb-4">
+            <div className="card border-1 mb-4">
                 <div className="card-header bg-success text-white">
                     <h2 className="mb-0 text-center">User Profile</h2>
                 </div>
-                <div className="card-body ml-5">
-                {customerId && (
+                <div className="card-body" style={{ textAlign: 'left' }}>
+                    {customerId && (
                         <div className="mb-3">
-                            <p className="fs-5"><FaIdCard /> Customer ID NUmber : <span className="fs-6 text-primary">{customerId}</span></p>
+                            <p className="fs-5"><FaIdCard /> Customer ID Number: <span className="fs-6 text-primary">{customerId}</span></p>
                         </div>
                     )}
 
-                    {firstName && (
+                    {user.firstName && (
                         <div className="mb-3">
-                            <p className="fs-5"><FaUser /> Customer Name: <span className="fs-6 text-primary">{firstName} {lastName}</span></p>
+                            <p className="fs-5"><FaUser /> Customer Name: <span className="fs-6 text-primary">{user.firstName} {user.lastName}</span></p>
                         </div>
                     )}
 
-                     {email && (
+                    {user.email && (
                         <div className="mb-3">
-                            <p className="fs-5"><FaEnvelope /> Customer Email: <span className="fs-6 text-primary">{email}</span></p>
+                            <p className="fs-5"><FaEnvelope /> Customer Email: <span className="fs-6 text-primary">{user.email}</span></p>
                         </div>
                     )}
 
-                      {phoneNumber && (
+                    {user.phoneNumber && (
                         <div className="mb-3">
-                            <p className="fs-5"><FaPhone /> Customer phoneNumber: <span className="fs-6 text-primary">{phoneNumber}</span></p>
+                            <p className="fs-5"><FaPhone /> Customer Phone Number: <span className="fs-6 text-primary">{user.phoneNumber}</span></p>
                         </div>
                     )}
-                     {gender && (
+
+                    {user.gender && (
                         <div className="mb-3">
-                            <p className="fs-5">< FaVenusMars /> Customer Gender: <span className="fs-6 text-primary">{gender}</span></p>
+                            <p className="fs-5"><FaVenusMars /> Customer Gender: <span className="fs-6 text-primary">{user.gender}</span></p>
                         </div>
                     )}
-                    {age && (
+
+                    {user.age && (
                         <div className="mb-3">
-                            <p className="fs-5">< FaBirthdayCake /> Customer Age: <span className="fs-6 text-primary">    {age}</span></p>
+                            <p className="fs-5"><FaBirthdayCake /> Customer Age: <span className="fs-6 text-primary">{user.age}</span></p>
                         </div>
                     )}
-                    {address && (
+
+                    {user.address && (
                         <div className="mb-3">
-                            <p className="fs-5">< FaHome /> Customer Address: <span className="fs-6 text-primary">{address}</span></p>
+                            <p className="fs-5"><FaHome /> Customer Address: <span className="fs-6 text-primary">{user.address}</span></p>
                         </div>
                     )}
-                    {adharaNumber && (
+
+                    {user.adharaNumber && (
                         <div className="mb-3">
-                            <p className="fs-5">< FaIdCard /> Customer AdharaNumber: <span className="fs-6 text-primary">{adharaNumber}</span></p>
+                            <p className="fs-5"><FaIdCard /> Customer Adhara Number: <span className="fs-6 text-primary">{user.adharaNumber}</span></p>
                         </div>
                     )}
-                    {panNumber && (
+
+                    {user.panNumber && (
                         <div className="mb-3">
-                            <p className="fs-5">< FaIdCard /> Customer PanNumber: <span className="fs-6 text-primary">{panNumber}</span></p>
+                            <p className="fs-5"><FaIdCard /> Customer PAN Number: <span className="fs-6 text-primary">{user.panNumber}</span></p>
                         </div>
                     )}
-                    
+
                     <div className="table-responsive mt-5 mb-5">
-                    <h2 className="mb-0 text-center bg-secondary text-white">Account Details</h2>
-                        <table className="table table-striped table-hover table-bordered mt-3">   
+                        <h2 className="mb-0 text-center bg-secondary text-white">Account Details</h2>
+                        <table className="table table-striped table-hover table-bordered mt-3">
                             <thead className="bg-light">
                                 <tr className="text-center">
                                     <th>Account Number</th>
@@ -125,8 +118,7 @@ function UserInformation({ customerId }) {
                         </table>
                     </div>
                     <div className="mt-2 mb-5 fs-5 text-center">
-                     <Link   to={`/pages/user/UpdateUser/${customerId}/${firstName}/${lastName}/${gender}/${age}/${adharaNumber}/${panNumber}`}  className="btn btn-primary"> Update Profile
-                     </Link>
+                        <Link to={`/pages/user/UpdateUser/${customerId}/${user.firstName}/${user.lastName}/${user.gender}/${user.age}/${user.adharaNumber}/${user.panNumber}`} className="btn btn-primary">Update Profile</Link>
                     </div>
                 </div>
             </div>

@@ -368,3 +368,19 @@
 }
 
 
+/* Home.css */
+
+/* Ensure the card body content is aligned to the left */
+.card-body {
+    text-align: left;
+}
+
+/* Center align only the header text */
+.card-header {
+    text-align: center;
+}
+
+/* Align the update button to the left */
+.btn-primary {
+    display: inline-block;
+}
