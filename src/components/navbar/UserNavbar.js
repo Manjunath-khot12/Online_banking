@@ -35,11 +35,11 @@ const UserNavbar = () => {
                     </li>
                 
                     <li className='dropdown'>
-                    <Link to="/pages/user/ViewBills"><button className='dropbtn link'   onClick={toggleDropdownb}>Pay-Bills</button></Link>
+                    <Link to="/pages/user/AddBiller"><button className='dropbtn link'   onClick={toggleDropdownb}>Pay-Bills</button></Link>
                         {showDropdownb && (
                             <div className='dropdown-content'>
                                 <Link className='link' onClick={toggleDropdownb} to="/pages/user/AddBiller">Add Bills</Link>
-                                <Link className='link' onClick={toggleDropdownb}  to="/pages/user/ViewBills">view Bills</Link>
+                                <Link className='link' onClick={toggleDropdownb}  to="/pages/user/BillView">view Bills</Link>
                             </div>
                         )}
                     </li>

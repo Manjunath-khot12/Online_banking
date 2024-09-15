@@ -3,9 +3,9 @@ import axios from 'axios';
 import { Card, Button, Spinner } from 'react-bootstrap';
 import { FaTint, FaGasPump, FaHome, FaBolt, FaMobileAlt } from 'react-icons/fa'; // Icons for various bill types
 import './ViewBill.css'; // Custom CSS for styling
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function ViewBills() {
+function ViewBills({ customerId }) {
     const [bills, setBills] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -14,21 +14,32 @@ function ViewBills() {
     useEffect(() => {
         async function fetchBills() {
             try {
-                const response = await axios.get('http://localhost:8080/banking/viewallbills');
-                setBills(response.data);
+                const response = await axios.get(`http://localhost:8080/banking/viewbillsById/${customerId}`);
+                // Transform the response data into a suitable format
+                const formattedBills = response.data.map(([billName, billType, provider], index) => ({
+                    billId: index + 1, // Generating a unique ID for each bill
+                    billName,
+                    billType,
+                    provider
+                }));
+                setBills(formattedBills);
                 setLoading(false);
             } catch (err) {
                 setError('Failed to fetch bills. Please try again later.');
                 setLoading(false);
             }
         }
-        fetchBills();
-    }, []);
-
-    
+        if (customerId) {
+            fetchBills();
+        }
+    }, [customerId]); // Add customerId to the dependency array
 
     // Function to return the correct icon based on bill type
     const getIcon = (billType) => {
+        if (!billType) {
+            return null; // Handle missing or undefined billType
+        }
+
         switch (billType.toLowerCase()) {
             case 'water':
                 return <FaTint className="bill-icon" />;
@@ -65,18 +76,22 @@ function ViewBills() {
                                     {/* Icon */}
                                     {getIcon(bill.billType)}
                                     {/* Bill Name */}
-                                    <Card.Title className="text-primary mt-3">{bill.billName}</Card.Title>
+                                    <Card.Title className="text-primary mt-3">{bill.billName || 'N/A'}</Card.Title>
                                     {/* Bill Details */}
                                     <Card.Text>
-                                        <strong>Type:</strong> {bill.billType.charAt(0).toUpperCase() + bill.billType.slice(1)}
+                                        <strong>Type:</strong> {bill.billType ? bill.billType.charAt(0).toUpperCase() + bill.billType.slice(1) : 'N/A'}
                                     </Card.Text>
                                     <Card.Text>
-                                        <strong>Provider:</strong> {bill.provider}
+                                        <strong>Provider:</strong> {bill.provider || 'N/A'}
                                     </Card.Text>
                                     {/* Pay Button */}
-                                    <Link   to={`/pages/user/PayBill/${bill.billName}/${bill.billType}/${bill.provider}`} >
-                                    <Button variant="success" className="w-100 mt-auto pay-button" >Pay Bill
-                                    </Button></Link>
+                                    <Link 
+                                        to={`/pages/user/PayBill/${bill.billName || 'N/A'}/${bill.billType || 'N/A'}/${bill.provider || 'N/A'}`}
+                                    >
+                                        <Button variant="success" className="w-100 mt-auto pay-button">
+                                            Pay Bill
+                                        </Button>
+                                    </Link>
                                 </Card.Body>
                             </Card>
                         </div>

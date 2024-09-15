@@ -20,6 +20,7 @@ import UpdateUser from './pages/user/UpdateUser';
 import AddBiller from './pages/user/AddBiller';
 import ViewBills from './pages/user/ViewBills';
 import PayBill from './pages/user/PayBill';
+import BillView from './pages/user/BillView';
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
@@ -48,6 +49,7 @@ function AppContent() {
             <Route path="/pages/user/UserProfile" element={<UserProfile />} />
             <Route path="/pages/user/UpdateUser/:customerId/:firstName/:lastName/:gender/:age/:adharaNumber/:panNumber" element={<UpdateUser />} />
             <Route path="/pages/user/AddBiller" element={<AddBiller />} />
+            <Route path="/pages/user/BillView" element={<BillView />} />
             <Route path="/pages/user/ViewBills" element={<ViewBills/>}/>
             <Route path="/pages/user/PayBill/:billName/:billType/:provider" element={<PayBill />} />
           </>

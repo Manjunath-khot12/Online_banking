@@ -4,14 +4,15 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Home.css'; // Custom CSS for additional styling
-import UserInformation from "./UserInformation";
+import ViewBills from "./ViewBills";
 
-function AccountDetails() {
+
+function BillView() {
     const { logout } = useAuth();
     const navigate = useNavigate();
     const [customerId, setCustomerId] = useState('');
     const [error, setError] = useState({});
-    const [showUserDetails, setShowUserDetails] = useState(false);
+    const [showBillDetails, setShowBillDetails] = useState(false);
 
     const userSchema = yup.object().shape({
         customerId: yup.number().typeError("customer id must be a number").integer("customer id must be an integer").required("customer id is required")
@@ -21,21 +22,21 @@ function AccountDetails() {
         try {
             await userSchema.validate({ customerId }, { abortEarly: false });
             setError({});
-            setShowUserDetails(true); // Show account info if validation is successful
+            setShowBillDetails(true); // Show account info if validation is successful
         } catch (error) {
             const errorMessages = {};
             error.inner.forEach((e) => {
                 errorMessages[e.path] = e.message;
             });
             setError(errorMessages);
-            setShowUserDetails(false); // Hide account info if validation fails
+            setShowBillDetails(false); // Hide account info if validation fails
         }
     }
 
     function handleReset() {
         setCustomerId('');
         setError({});
-        setShowUserDetails(false); // Hide account info on reset
+        setShowBillDetails(false); // Hide account info on reset
     }
 
     const handleLogout = () => {
@@ -48,7 +49,7 @@ function AccountDetails() {
         <div className="row justify-content-center">
             <div className="col-lg-9">
                 <div className="card shadow-lg p-4">
-                    <h2 className="text-center mt-4 mb-4">User Profile</h2>
+                    <h2 className="text-center mt-4 mb-4">View Bills</h2>
                     <form>
                     <div className='form-group mb-3'>
                             <label htmlFor='customerId' className='form-label'>Enter Customer ID : </label>
@@ -69,9 +70,9 @@ function AccountDetails() {
             </div>
         </div>
         {/* Conditionally render the account information if the form is validated */}
-        {showUserDetails && (
+        {showBillDetails && (
                     <div className="mt-5">
-                        <UserInformation customerId={customerId} />
+                        <ViewBills customerId={customerId} />
                     </div>
                 )}
     </div>
@@ -80,4 +81,4 @@ function AccountDetails() {
     );
 }
 
-export default AccountDetails;
+export default BillView;
