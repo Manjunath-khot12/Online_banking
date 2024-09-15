@@ -8,10 +8,12 @@ function AddBiller() {
   const [billName, setBillName] = useState('');
   const [billType, setBillType] = useState('');
   const[provider,setProvider]=useState('');
+  const[customerId,setCustomerId]=useState('');
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 
   const userSchema = yup.object().shape({
+    customerId:yup.number().typeError("customer id must be a number").integer("customer id must be a integer").required("customer id is required"),
     billName: yup.string().required("Bill name is required"),
     billType: yup.string().required("Bill type is required"),
     provider:yup.string().required("provider is required")
@@ -19,7 +21,7 @@ function AddBiller() {
 
   async function validateForm() {
     try {
-      await userSchema.validate({ billName, billType,provider }, { abortEarly: false });
+      await userSchema.validate({ customerId,billName, billType,provider }, { abortEarly: false });
       setError({});
       handleSubmit();
     } catch (error) {
@@ -34,7 +36,7 @@ function AddBiller() {
   async function handleSubmit() {
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8080/banking/addbiller', { billName, billType, provider});
+      const response = await axios.post(`http://localhost:8080/banking/addbiller?userId=${customerId}`, {billName, billType, provider});
       if (response.status === 200) {
         Swal.fire({
           title: 'Success!',
@@ -70,6 +72,7 @@ function AddBiller() {
     setBillName('');
     setBillType('');
     setProvider('');
+    setCustomerId('');
     setError({});
   }
 
@@ -175,6 +178,11 @@ function AddBiller() {
           <div className="card shadow-lg p-4">
             <h2 className="text-center mb-4">Add Bills</h2>
             <form>
+              <div className="form-group mt-3">
+                <label htmlFor="customerId" className="form-label">Enter Customer Id</label>
+                <input id="customerId" className={`form-control ${error.customerId ? 'is-invalid' : ''}`} value={customerId} placeholder="Enter customer Id" onChange={(e)=>setCustomerId(e.target.value)}/>
+                {error.customerId && <div className='invalid-feedback'>{error.customerId}</div>}
+              </div>
               <div className="form-group mt-3">
                 <label htmlFor="billName" className="form-label">Bill Name :</label>
                 <select className={`form-control ${error.billName ? 'is-invalid' : ''}`} id='billName' value={billName} onChange={(e) => setBillName(e.target.value)}>
