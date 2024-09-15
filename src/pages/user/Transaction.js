@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Home.css';
 import axios from "axios";
 import { Spinner } from 'react-bootstrap'; // Import Spinner component
+import Swal from "sweetalert2";
 
 function Transaction() {
     const [sourceAccount, setSourceAccount] = useState('');
@@ -56,11 +57,31 @@ function Transaction() {
                 transactionDate: new Date().toISOString().split('T')[0] // current date in YYYY-MM-DD format
             });
             if (response.status === 200) {
-                alert("Amount transfer Successful");
+                Swal.fire({
+                    title: 'Amount Transfer Successful!',
+                    text: 'Your payment has been processed successfully.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button'
+                    }
+                });
                 handleReset();
             }
         } catch (error) {
-            setError({ general: 'Insufficient balance. Please try again later.' });
+            Swal.fire({
+                title: 'Insufficient Balance',
+                text: 'There was an issue processing your payment. Please try again later.',
+                icon: 'error',
+                confirmButtonText: 'Try Again',
+                customClass: {
+                    title: 'swal-title',
+                    content: 'swal-content',
+                    confirmButton: 'swal-confirm-button'
+                }
+            });
         } finally {
             setLoading(false); // Set loading to false after submission completes
         }

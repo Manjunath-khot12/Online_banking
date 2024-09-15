@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as yup from 'yup';
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Swal from "sweetalert2";
 
 function Withdraw() {
     const [sourceAccount, setSourceAccount] = useState('');
@@ -45,11 +46,31 @@ function Withdraw() {
                 transactionDate: new Date().toISOString().split('T')[0] // current date in YYYY-MM-DD format
             });
             if (response.status === 200) {
-                alert("Amount Withdrawn Successfully\n\nYour withdrawn details are sent to your Registered Email Id");
+                Swal.fire({
+                    title: 'Withdraw Successful!',
+                    text: 'Your payment has been processed successfully.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button'
+                    }
+                });
                 handleReset();
             }
         } catch (error) {
-            setError({ general: 'Insufficient Balance. Please enter an amount less than the balance.' });
+            Swal.fire({
+                title: 'Insufficient Balance',
+                text: 'There was an issue processing your payment. Please try again later.',
+                icon: 'error',
+                confirmButtonText: 'Try Again',
+                customClass: {
+                    title: 'swal-title',
+                    content: 'swal-content',
+                    confirmButton: 'swal-confirm-button'
+                }
+            });
         } finally {
             setLoading(false); // Set loading to false after submission
         }

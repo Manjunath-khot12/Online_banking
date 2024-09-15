@@ -54,45 +54,59 @@ function TransactionInformation({ accountNumber }) {
     }
 
     if (!transactionInformation.length) {
-        return <div className="text-danger text-center mt-4">You don't have any transaction details.</div>;
+        return <div className="alert alert-danger text-center mt-4">You don't have any transaction details.</div>;
     }
 
     return (
         <div className="container-fluid mt-4">
-            <div  id="transaction-table" className="card shadow-lg border-0 mb-4">
+            <div id="transaction-table" className="card shadow-lg border-0 mb-4">
                 <div className="card-header bg-primary text-white">
-                    <h2 className="mb-0 text-center">Transaction Information</h2>
+                    <h2 className="mb-0 text-center text-dark">Transaction Information</h2>
                 </div>
                 <div className="card-body">
-                   
                     <div className="table-responsive mt-5 mb-5">
-                        <table id="transaction-table" className="table table-striped table-hover table-bordered mt-3">
+                        <table className="table table-striped table-hover table-bordered mt-3">
                             <thead className="bg-light">
                                 <tr className="text-center">
                                     <th>Transaction ID</th>
                                     <th>Transaction Date</th>
                                     <th>Transaction Description</th>
+                                    <th>Transaction Type</th>
                                     <th>From Account</th>
                                     <th>To Account</th>
                                     <th>Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {transactionInformation.map((transaction, index) => (
-                                    <tr key={index} className="text-center">
-                                        <td>{transaction[0] || ''}</td>
-                                        <td>{transaction[2] || ''}</td>
-                                        <td>{transaction[3] || ''}</td>
-                                        <td>{transaction[6] || ''}</td>
-                                        <td>{transaction[5] || ''}</td>
-                                        <td>₹ {transaction[1] !== undefined ? Number(transaction[1]).toLocaleString() : 'N/A'}</td>
-                                    </tr>
-                                ))}
+                                {transactionInformation.map((transaction, index) => {
+                                    const transactionType = transaction[4]; // Assuming transactionType is at index 4
+                                    const amount = transaction[1] !== undefined ? Number(transaction[1]).toLocaleString() : 'N/A';
+                                    const isWithdraw = transactionType === 'withdraw';
+                                    const isBillType = ['gas', 'electricity', 'Rent', 'water', 'mobile'].includes(transactionType);
+                                    const isDeposit = transactionType === 'deposit' || !isBillType && !isWithdraw;
+                                    const formattedAmount = isWithdraw || isBillType ? `- ₹ ${amount}` : `₹ ${amount}`;
+                                    const color = isWithdraw || isBillType ? 'red' : (isDeposit ? 'blue' : 'inherit');
+                                    const fontWeight = isWithdraw || isBillType ? 'bold' : 'normal';
+
+                                    return (
+                                        <tr key={index} className="text-center">
+                                            <td>{transaction[0] || ''}</td>
+                                            <td>{transaction[2] || ''}</td>
+                                            <td>{transaction[3] || ''}</td>
+                                            <td>{transactionType || ''}</td>
+                                            <td>{transaction[6] || ''}</td>
+                                            <td>{transaction[5] || ''}</td>
+                                            <td style={{ color, fontWeight }}>
+                                                {formattedAmount}
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
                             </tbody>
                         </table>
                     </div>
-                     <div className="d-flex justify-content-center mb-3">
-                        <button className="btn btn-primary " onClick={downloadPDF}>Download as PDF</button>
+                    <div className="d-flex justify-content-center mb-3">
+                        <button className="btn btn-primary" onClick={downloadPDF}>Download as PDF</button>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as yup from 'yup';
 import { Spinner } from 'react-bootstrap';
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function AddBiller() {
   const [billName, setBillName] = useState('');
@@ -35,11 +36,31 @@ function AddBiller() {
     try {
       const response = await axios.post('http://localhost:8080/banking/addbiller', { billName, billType, provider});
       if (response.status === 200) {
-        alert("Bill Added Successfully");
+        Swal.fire({
+          title: 'Success!',
+          text: 'Bill added successfully.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          customClass: {
+              title: 'swal-title',
+              content: 'swal-content',
+              confirmButton: 'swal-confirm-button'
+          }
+      });
         handleReset();
       }
     } catch (error) {
-      setError({ general: 'Error in adding bill. Please try again later.' });
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error in adding bill. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'Try Again',
+        customClass: {
+            title: 'swal-title',
+            content: 'swal-content',
+            confirmButton: 'swal-confirm-button'
+        }
+    });
     } finally {
       setLoading(false);
     }

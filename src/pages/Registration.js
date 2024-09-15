@@ -5,6 +5,7 @@ import './Home.css';
 import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
+import Swal from "sweetalert2";
 
 function Register() {
     const [firstName, setFirstName] = useState('');
@@ -63,8 +64,18 @@ function Register() {
             });
 
             if (response.status === 200) {
-                alert("Registration Successful\n\n" +
-                    "Your Login Details will be sent through your Registered email id");
+                Swal.fire({
+                    title: 'Registration Successful!',
+                    text: 'Your login details will be sent to your registered email ID shortly.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button'
+                    }
+                });
+                
                 navigate('/pages/login');
             }
         } catch (error) {

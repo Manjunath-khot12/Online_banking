@@ -3,6 +3,7 @@ import React,{useState} from "react";
 import { useParams } from "react-router-dom";
 import * as yup from 'yup';
 import { useNavigate} from 'react-router-dom';
+import Swal from "sweetalert2";
 
 function UpdateUser() {
     const { customerId } = useParams();  // Get customerId from the URL
@@ -59,13 +60,33 @@ function UpdateUser() {
                 }
             });
             if (response.status === 200) {
-                alert("Profile Updated successfully.");
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Profile updated successfully.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button'
+                    }
+                });
                 navigate('/pages/user/UserProfile');
             }
         }
         catch(error)
         {
-            setError({ general: 'Profile Update is failed..' });
+            Swal.fire({
+                title: 'Error!',
+                text: 'Profile update failed. Please try again later.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    title: 'swal-title',
+                    content: 'swal-content',
+                    confirmButton: 'swal-confirm-button'
+                }
+            });
         }
     }
 

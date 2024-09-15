@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 function CreateAccount() {
     const [customerId, setCustomerId] = useState('');
@@ -51,15 +52,45 @@ function CreateAccount() {
             });
 
             if (response.status === 201) {
-                alert("Account Created Successfully");
+                Swal.fire({
+                    title: 'Account Created Successful!',
+                    text: 'Your has been created successfully.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button'
+                    }
+                });
                 handleReset();
             } else {
-                alert("Failed to create account. Please try again.");
+                Swal.fire({
+                    title: 'Failed to create account',
+                    text: 'There was an issue for creating account. Please try again later.',
+                    icon: 'error',
+                    confirmButtonText: 'Try Again',
+                    customClass: {
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button'
+                    }
+                });
             }
         } catch (error) {
             console.error("Account creation error:", error);
-            setError({ general: 'Account creation failed, try again.' });
-            alert("Account creation failed. Please check your details details.");
+            
+            Swal.fire({
+                title: 'Failed to create account',
+                text: 'There was an issue for creating account. Please try again later.',
+                icon: 'error',
+                confirmButtonText: 'Try Again',
+                customClass: {
+                    title: 'swal-title',
+                    content: 'swal-content',
+                    confirmButton: 'swal-confirm-button'
+                }
+            });
         } finally {
             setLoading(false);
         }

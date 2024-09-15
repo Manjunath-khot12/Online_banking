@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap'; // Optional: Bootstrap spinner
+import Swal from "sweetalert2";
 
 function ForgotPassword() {
     const [email, setEmail] = useState('');
@@ -40,14 +41,43 @@ function ForgotPassword() {
                 const data = response.data;
                 setFirstName(data.firstName);
                 setEmail(data.email);
-                alert(`Hi, ${data.firstName}\n\nYour Password has been sent to your registered email: ${data.email}`);
+                Swal.fire({
+                    title: `Hi, ${data.firstName}`,
+                    text: `Your Password has been sent to your registered email: ${data.email}`,
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button'
+                    }
+                });
                 navigate('/pages/login');
             } else {
-                setError({ general: "Invalid Credentials" });
+                Swal.fire({
+                    title: 'Invalid Credentials',
+                    text: 'The username or password you entered is incorrect. Please try again.',
+                    icon: 'error',
+                    confirmButtonText: 'Retry',
+                    customClass: {
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button'
+                    }
+                });
             }
         } catch (error) {
-            console.error("Error response:", error.response); 
-            setError({ general: 'Error in getting password, Please try again' });
+            Swal.fire({
+                title: 'Invalid Credentials',
+                text: 'The username or password you entered is incorrect. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'Retry',
+                customClass: {
+                    title: 'swal-title',
+                    content: 'swal-content',
+                    confirmButton: 'swal-confirm-button'
+                }
+            });
         } finally {
             setLoading(false); // Stop loading spinner
         }

@@ -29,7 +29,7 @@ function AccountInformation({ accountNumber }) {
     }
 
     if (!accountDetails.length) {
-        return <div className="text-danger text-center mt-4">You don't have any accounts.</div>;
+        return <div className="  alert alert-danger text-center mt-4">You don't have any accounts.</div>;
     }
 
     const firstName = accountDetails.length > 0 ? accountDetails[0].firstName : '';

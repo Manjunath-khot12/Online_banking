@@ -193,6 +193,7 @@
 
 .card-body {
     font-family: 'Arial', sans-serif;
+    margin-left: 0px;
 }
 
 .table th {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as yup from 'yup';
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Swal from "sweetalert2";
 
 function Deposit() {
     const [sourceAccount, setSourceAccount] = useState('');
@@ -44,10 +45,30 @@ function Deposit() {
                 amount,
                 transactionDate: new Date().toISOString().split('T')[0] // current date in YYYY-MM-DD format
             });
-            alert("Amount Deposited Successfully\n\nYour Deposit Details are sent to your Registered Email Id");
+            Swal.fire({
+                title: 'Success!',
+                text: 'Amount Deposited Successfully\n\nYour Deposit Details are sent to your Registered Email Id',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                customClass: {
+                    title: 'swal-title',
+                    content: 'swal-content',
+                    confirmButton: 'swal-confirm-button'
+                }
+            });
             handleReset();
         } catch (error) {
-            setError({ general: 'Error saving transaction. Please try again later.' });
+            Swal.fire({
+                title: 'Error!',
+                text: 'Error saving transaction. Please try again later.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    title: 'swal-title',
+                    content: 'swal-content',
+                    confirmButton: 'swal-confirm-button'
+                }
+            });
         } finally {
             setLoading(false); // Set loading to false after submission
         }

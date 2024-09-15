@@ -6,6 +6,7 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
+import Swal from "sweetalert2";
 
 function Login() {
     const [customerId, setCustomerId] = useState('');
@@ -53,11 +54,31 @@ function Login() {
                     const data = response.data;
                     setFirstName(data.firstName);
                     setCustomerId(data.customerId);
-                    alert(`Welcome, ${data.firstName}\ncustomer id,${customerId}`);
+                    Swal.fire({
+                        title: `Welcome, ${data.firstName}!`,
+                        text: `Customer ID: ${customerId}`,
+                        icon: 'success',
+                        confirmButtonText: 'Continue',
+                        customClass: {
+                            title: 'swal-title',
+                            content: 'swal-content',
+                            confirmButton: 'swal-confirm-button'
+                        }
+                    });
                     login(); // Set authentication state
                     navigate('/pages/user/UserHome', { state: { firstName: data.firstName, customerId: data.customerId } });
                 } else {
-                    setError({ global: "Invalid Credentials" });
+                    Swal.fire({
+                        title: 'Invalid Credentials',
+                        text: 'Please check your username and password and try again.',
+                        icon: 'error',
+                        confirmButtonText: 'Retry',
+                        customClass: {
+                            title: 'swal-title',
+                            content: 'swal-content',
+                            confirmButton: 'swal-confirm-button'
+                        }
+                    });
                 }
             } catch (error) {
                 setError({ global: 'Error Logging in, Please try again' });
