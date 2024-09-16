@@ -11,7 +11,6 @@ function AccountDetails() {
     const navigate = useNavigate();
     const [customerId, setCustomerId] = useState('');
     const [error, setError] = useState({});
-    const [showUserDetails, setShowUserDetails] = useState(false);
 
     const userSchema = yup.object().shape({
         customerId: yup.number().typeError("customer id must be a number").integer("customer id must be an integer").required("customer id is required")
@@ -21,21 +20,19 @@ function AccountDetails() {
         try {
             await userSchema.validate({ customerId }, { abortEarly: false });
             setError({});
-            setShowUserDetails(true); // Show account info if validation is successful
+            navigate(`/pages/user/UserInformation/${customerId}`);
         } catch (error) {
             const errorMessages = {};
             error.inner.forEach((e) => {
                 errorMessages[e.path] = e.message;
             });
             setError(errorMessages);
-            setShowUserDetails(false); // Hide account info if validation fails
         }
     }
 
     function handleReset() {
         setCustomerId('');
         setError({});
-        setShowUserDetails(false); // Hide account info on reset
     }
 
     const handleLogout = () => {
@@ -68,12 +65,6 @@ function AccountDetails() {
                 </div>
             </div>
         </div>
-        {/* Conditionally render the account information if the form is validated */}
-        {showUserDetails && (
-                    <div className="mt-5">
-                        <UserInformation customerId={customerId} />
-                    </div>
-                )}
     </div>
            
     

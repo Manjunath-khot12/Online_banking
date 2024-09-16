@@ -4,11 +4,13 @@ import { Card, Button, Spinner } from 'react-bootstrap';
 import { FaTint, FaGasPump, FaHome, FaBolt, FaMobileAlt } from 'react-icons/fa'; // Icons for various bill types
 import './ViewBill.css'; // Custom CSS for styling
 import { Link } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
-function ViewBills({ customerId }) {
+function ViewBills() {
     const [bills, setBills] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { customerId} = useParams();
 
     // Fetch bills from the API when the component mounts
     useEffect(() => {

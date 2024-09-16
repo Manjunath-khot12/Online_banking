@@ -10,7 +10,6 @@ function TransactionHistory()
     const[error,setError]=useState({});
     const { logout } = useAuth();
     const navigate = useNavigate();
-    const[showTransactionInfo,setShowTransactionInfo]=useState(false);
 
 
     const userSchema=yup.object().shape({
@@ -25,7 +24,7 @@ function TransactionHistory()
         {
             await userSchema.validate({accountNumber},{abortEarly:false});
             setError({});
-            setShowTransactionInfo(true);
+            navigate(`/pages/user/TransactionInformation/${accountNumber}`);
         }
         catch(error)
         {
@@ -36,7 +35,6 @@ function TransactionHistory()
                } 
             );
             setError(errorMessages);
-            setShowTransactionInfo(false);
         }
     }
 
@@ -44,7 +42,6 @@ function TransactionHistory()
     {
         setAccountNumber('');
         setError({});
-        setShowTransactionInfo(false);
     }
 
 
@@ -63,7 +60,7 @@ function TransactionHistory()
                         <form>
                         <div className='form-group mb-3'>
                                 <label htmlFor='accountNumber' className='form-label'>Enter Account Number</label>
-                                <input type='text' className={`form-control ${error.accountNumber ? 'is-invalid' : ''}`} id='accountNumber' autoComplete="off" placeholder='Enter Account Number' value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
+                                <input type='text' className={`form-control ${error.accountNumber ? 'is-invalid' : ''}`} id='accountNumber'  placeholder='Enter Account Number' value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
                                 {error.accountNumber && <div className='invalid-feedback'>{error.accountNumber}</div>}
                         </div>
                         <div className="d-flex justify-content-between">
@@ -79,11 +76,6 @@ function TransactionHistory()
                     </div>
                 </div>
             </div>
-            {showTransactionInfo && (
-                    <div className="mt-5">
-                        <TransactionInformation accountNumber={accountNumber} />
-                    </div>
-                )}
         </div>
     )
 }

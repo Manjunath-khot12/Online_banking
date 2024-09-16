@@ -3,13 +3,16 @@ import * as yup from 'yup';
 import { Button, Form, Card, Spinner } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './BillStatement.css'; // Custom CSS for additional styling
+import BankStatementView from "./BankStatementView";
+import { useNavigate } from 'react-router-dom';
 
 function BillStatement() {
     const [accountNumber, setAccountNumber] = useState('');
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
     const [error, setError] = useState({});
-    const [loading, setLoading] = useState(false); // State to handle loading
+    const [loading, setLoading] = useState(false); 
+    const navigate = useNavigate();
 
     const userSchema = yup.object().shape({
         accountNumber: yup.number()
@@ -30,27 +33,13 @@ function BillStatement() {
         try {
             await userSchema.validate({ accountNumber, fromDate, toDate }, { abortEarly: false });
             setError({});
-            handleSubmit();
+            navigate(`/pages/user/BankStatementView/${accountNumber}/${fromDate}/${toDate}`);
         } catch (error) {
             const errorMessages = {};
             error.inner.forEach((e) => {
                 errorMessages[e.path] = e.message;
             });
             setError(errorMessages);
-        }
-    }
-
-    async function handleSubmit() {
-        setLoading(true);
-        try {
-            // Mock submission or API call
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulating network delay
-            alert('Bill Statement generated successfully.');
-        } catch (error) {
-            console.error("Error during submission:", error);
-            alert('An error occurred while generating the bill statement.');
-        } finally {
-            setLoading(false);
         }
     }
 

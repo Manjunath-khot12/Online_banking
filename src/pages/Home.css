@@ -309,7 +309,8 @@
     margin: 0;
     padding: 0;
     display: flex;
-    align-items: center;
+    justify-content: space-around;
+    margin-left: 100px;
 }
 
 .nav-links li {
@@ -319,6 +320,9 @@
 .nav-links .link {
     color: white;
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-self: center;
 }
 
 .nav-links .link:hover {

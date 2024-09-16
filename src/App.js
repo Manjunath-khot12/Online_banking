@@ -21,6 +21,10 @@ import AddBiller from './pages/user/AddBiller';
 import ViewBills from './pages/user/ViewBills';
 import PayBill from './pages/user/PayBill';
 import BillView from './pages/user/BillView';
+import AccountInformation from './pages/user/AccountInformation';
+import TransactionInformation from './pages/user/TransactionInformation';
+import UserInformation from './pages/user/UserInformation';
+import BankStatementView from './pages/user/BankStatementView';
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
@@ -41,17 +45,21 @@ function AppContent() {
             <Route path="/pages/user/UserHome" element={<UserHome />} />
             <Route path="/pages/user/CreateAccount" element={<CreateAccount />} />
             <Route path="/pages/user/AccountDetials" element={<AccountDetails />} />
+            <Route path="/pages/user/AccountInformation/:accountNumber" element={<AccountInformation />} />
             <Route path="/pages/user/Transaction" element={<Transaction />} />
             <Route path="/pages/user/Deposit" element={<Deposit />} />
             <Route path="/pages/user/Withdraw" element={<Withdraw />} />
             <Route path="/pages/user/TransactionHistory" element={<TransactionHistory />} />
+            <Route path="/pages/user/TransactionInformation/:accountNumber" element={<TransactionInformation />} />
             <Route path="/pages/user/BillStatement" element={<BillStatement />} />
             <Route path="/pages/user/UserProfile" element={<UserProfile />} />
+            <Route path="/pages/user/UserInformation/:customerId" element={<UserInformation />} />
             <Route path="/pages/user/UpdateUser/:customerId/:firstName/:lastName/:gender/:age/:adharaNumber/:panNumber" element={<UpdateUser />} />
             <Route path="/pages/user/AddBiller" element={<AddBiller />} />
             <Route path="/pages/user/BillView" element={<BillView />} />
-            <Route path="/pages/user/ViewBills" element={<ViewBills/>}/>
+            <Route path="/pages/user/ViewBills/:customerId" element={<ViewBills/>}/>
             <Route path="/pages/user/PayBill/:billName/:billType/:provider" element={<PayBill />} />
+            <Route path="/pages/user/BankStatementView/:accountNumber/:fromDate/:toDate" element={<BankStatementView />} />
           </>
         )}
   

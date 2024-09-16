@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaUser, FaEnvelope, FaPhone, FaIdCard } from "react-icons/fa";
 import '../Home.css';
+import { useParams } from "react-router-dom";
 
-function AccountInformation({ accountNumber }) {
+function AccountInformation() {
     const [accountDetails, setAccountDetails] = useState([]);
     const [error, setError] = useState("");
+    const { accountNumber} = useParams();
 
     useEffect(() => {
         // Fetch account details using the accountNumber
@@ -35,7 +37,7 @@ function AccountInformation({ accountNumber }) {
     const account = accountDetails[0]; // Assuming accountDetails array has at least one element
 
     return (
-        <div className="container-fluid mt-4">
+        <div className="container mt-4">
             <div className="card border-1 mb-4">
                 <div className="card-header bg-primary text-white">
                     <h2 className="mb-0 text-center text-dark">Account Information</h2>

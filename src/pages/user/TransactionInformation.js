@@ -3,10 +3,12 @@ import axios from "axios";
 import '../Home.css';
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useParams } from "react-router-dom";
 
-function TransactionInformation({ accountNumber }) {
+function TransactionInformation() {
     const [transactionInformation, setTransactionInformation] = useState([]);
     const [error, setError] = useState("");
+    const { accountNumber} = useParams();
 
     useEffect(() => {
         async function fetchTransactionDetails() {
@@ -58,7 +60,7 @@ function TransactionInformation({ accountNumber }) {
     }
 
     return (
-        <div className="container-fluid mt-4">
+        <div className="container mt-4">
             <div id="transaction-table" className="card border-2 mb-4">
                 <div className="card-header bg-primary text-white">
                     <h2 className="mb-0 text-center text-dark">Transaction Information</h2>

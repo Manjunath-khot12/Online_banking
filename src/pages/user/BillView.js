@@ -12,7 +12,6 @@ function BillView() {
     const navigate = useNavigate();
     const [customerId, setCustomerId] = useState('');
     const [error, setError] = useState({});
-    const [showBillDetails, setShowBillDetails] = useState(false);
 
     const userSchema = yup.object().shape({
         customerId: yup.number().typeError("customer id must be a number").integer("customer id must be an integer").required("customer id is required")
@@ -22,21 +21,19 @@ function BillView() {
         try {
             await userSchema.validate({ customerId }, { abortEarly: false });
             setError({});
-            setShowBillDetails(true); // Show account info if validation is successful
+            navigate(`/pages/user/ViewBills/${customerId}`);
         } catch (error) {
             const errorMessages = {};
             error.inner.forEach((e) => {
                 errorMessages[e.path] = e.message;
             });
             setError(errorMessages);
-            setShowBillDetails(false); // Hide account info if validation fails
         }
     }
 
     function handleReset() {
         setCustomerId('');
         setError({});
-        setShowBillDetails(false); // Hide account info on reset
     }
 
     const handleLogout = () => {
@@ -69,12 +66,6 @@ function BillView() {
                 </div>
             </div>
         </div>
-        {/* Conditionally render the account information if the form is validated */}
-        {showBillDetails && (
-                    <div className="mt-5">
-                        <ViewBills customerId={customerId} />
-                    </div>
-                )}
     </div>
            
     
