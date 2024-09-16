@@ -52,7 +52,7 @@ function AccountDetails() {
                     <form>
                     <div className='form-group mb-3'>
                             <label htmlFor='accountNumber' className='form-label'>Enter Account Number</label>
-                            <input type='text' className={`form-control ${error.accountNumber ? 'is-invalid' : ''}`} id='accountNumber' autoComplete="off" placeholder='Enter Account Number' value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
+                            <input type='text' className={`form-control ${error.accountNumber ? 'is-invalid' : ''}`} id='accountNumber'  placeholder='Enter Account Number' value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
                             {error.accountNumber && <div className='invalid-feedback'>{error.accountNumber}</div>}
                     </div>
                     <div className="d-flex justify-content-between">

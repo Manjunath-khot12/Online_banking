@@ -104,6 +104,7 @@ function UpdateUser() {
             <div className="row  justify-content-center">
                     <h2 className="text-center mb-5 mt-3">Update Profile</h2>
                 <div className="col-md-10">
+                <div className="card border-1 p-5">
                     <form>
                         <div className="mb-3">
                             <label htmlFor="firstName" className="form-label">First Name:</label>
@@ -145,6 +146,7 @@ function UpdateUser() {
                         </button>
                         <div className="text-danger fs-5 text-center mt-4">{error.general}</div>
                     </form>
+                </div>
                 </div>
             </div>
         </div>

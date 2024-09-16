@@ -60,7 +60,7 @@ function ViewBills({ customerId }) {
     // Conditionally render loading spinner, error message, or bill cards
     return (
         <div className="container mt-5">
-            <h2 className="text-center mb-4 fs-2">All Bills</h2>
+           
             {loading ? (
                 <div className="text-center">
                     <Spinner animation="border" />
