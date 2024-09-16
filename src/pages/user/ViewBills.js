@@ -51,7 +51,6 @@ function ViewBills({ customerId }) {
                 return <FaBolt className="bill-icon" />;
             case 'mobile':
                 return <FaMobileAlt className="bill-icon" />;
-            // Add more cases for other types of bills if needed
             default:
                 return null;
         }
