@@ -60,9 +60,9 @@ function BankStatementView() {
         doc.text("Amount Information", 10, 80);
         const total = accountDetails.totalAmount[0];
         if (total) {
-            doc.text(`Total Deposits: ₹${total[0]}`, 10, 90);
-            doc.text(`Total Withdrawals: ₹${total[1]}`, 10, 100);
-            doc.text(`Total Bills: ₹${total[2]}`, 10, 110);
+            doc.text(`Total Deposit Amount : ₹${total[0]}`, 10, 90);
+            doc.text(`Total Withdrawal Amount : ₹${total[1]}`, 10, 100);
+            doc.text(`Total Bills Amount : ₹${total[2]}`, 10, 110);
         }
 
         doc.text("Transaction Information", 10, 120);

@@ -36,6 +36,10 @@ function ViewBills() {
         }
     }, [customerId]); // Add customerId to the dependency array
 
+    if (!bills.length) {
+        return <div className="alert alert-danger text-center m-auto mt-4">You don't have any accounts.</div>;
+    }
+
     // Function to return the correct icon based on bill type
     const getIcon = (billType) => {
         if (!billType) {
