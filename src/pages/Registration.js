@@ -79,8 +79,17 @@ function Register() {
                 navigate('/pages/login');
             }
         } catch (error) {
-            console.error("Registration error:", error);
-            setErrors({ general: 'Already have Account.' });
+            Swal.fire({
+                title: 'Already Have an Account',
+                text: 'Please check your credentilas and try again.',
+                icon: 'error',
+                confirmButtonText: 'Retry',
+                customClass: {
+                    title: 'swal-title',
+                    content: 'swal-content',
+                    confirmButton: 'swal-confirm-button'
+                }
+            });
         } finally {
             setLoading(false); // Hide the spinner after the request is completed
         }

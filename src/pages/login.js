@@ -18,7 +18,7 @@ function Login() {
     const navigate = useNavigate();
 
     const userSchema = yup.object().shape({
-        customerId: yup.number().typeError("Customer id must be a number").integer("customerId must be integer").required("Email is required"),
+        customerId: yup.number().typeError("Customer id must be a number").integer("customerId must be integer").required("CustomerId  is required"),
         password: yup.string().required("Password is required")
     });
 
@@ -42,7 +42,7 @@ function Login() {
         const isValid = await validateForm();
 
         if (!customerId) {
-            setError({ global: 'Email cannot be empty' });
+            setError({ global: 'CustomerId cannot be empty' });
             return;
         }
 
@@ -81,7 +81,17 @@ function Login() {
                     });
                 }
             } catch (error) {
-                setError({ global: 'Error Logging in, Please try again' });
+                Swal.fire({
+                    title: 'Error In Login',
+                    text: 'Please check your username and password and try again.',
+                    icon: 'error',
+                    confirmButtonText: 'Retry',
+                    customClass: {
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button'
+                    }
+                });
             } finally {
                 setLoading(false); // Hide the spinner after the request is completed
             }

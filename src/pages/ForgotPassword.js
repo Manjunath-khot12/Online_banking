@@ -56,7 +56,7 @@ function ForgotPassword() {
             } else {
                 Swal.fire({
                     title: 'Invalid Credentials',
-                    text: 'The username or password you entered is incorrect. Please try again.',
+                    text: 'The Email you entered is incorrect. Please try again.',
                     icon: 'error',
                     confirmButtonText: 'Retry',
                     customClass: {
@@ -69,7 +69,7 @@ function ForgotPassword() {
         } catch (error) {
             Swal.fire({
                 title: 'Invalid Credentials',
-                text: 'The username or password you entered is incorrect. Please try again.',
+                text: 'The Email you entered is incorrect. Please try again.',
                 icon: 'error',
                 confirmButtonText: 'Retry',
                 customClass: {
