@@ -71,7 +71,7 @@ function ForgotPassword() {
                 title: 'Invalid Credentials',
                 text: 'The Email you entered is incorrect. Please try again.',
                 icon: 'error',
-                confirmButtonText: 'Retry',
+                confirmButtonText: 'info',
                 customClass: {
                     title: 'swal-title',
                     content: 'swal-content',
