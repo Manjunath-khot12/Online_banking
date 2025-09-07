@@ -44,7 +44,7 @@ function CreateAccount() {
     async function handleSubmit() {
         setLoading(true);
         try {
-            const response = await axios.post(`http://localhost:8080/banking/createAccount?userId=${customerId}`, {
+            const response = await axios.post(`http://localhost:8081/banking/createAccount?userId=${customerId}`, {
                 adharaNumber,
                 panNumber,
                 accountType,

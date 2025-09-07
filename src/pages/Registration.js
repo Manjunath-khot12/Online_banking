@@ -51,7 +51,7 @@ function Register() {
         console.log("Submitting data:", { firstName, lastName, phoneNumber, age, email, password, address, gender, createdDate });
         setLoading(true); // Show the spinner before making the request
         try {
-            const response = await axios.post('http://localhost:8080/banking/register', {
+            const response = await axios.post('http://localhost:8081/banking/register', {
                 firstName: firstName,
                 lastName: lastName,
                 phoneNumber: phoneNumber,
@@ -62,7 +62,7 @@ function Register() {
                 gender: gender,
                 createdDate: createdDate
             });
-
+          
             if (response.status === 200) {
                 Swal.fire({
                     title: 'Registration Successful!',

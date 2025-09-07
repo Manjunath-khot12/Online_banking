@@ -14,7 +14,7 @@ function UserInformation() {
         // Fetch account details using the customerId
         async function fetchUserDetails() {
             try {
-                const response = await axios.get(`http://localhost:8080/banking/userdetails/${customerId}`);
+                const response = await axios.get(`http://localhost:8081/banking/userdetails/${customerId}`);
                 setUserDetails(response.data);
             } catch (err) {
                 setError("Failed to fetch account details. Please try again later.");

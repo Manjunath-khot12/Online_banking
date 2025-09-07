@@ -16,7 +16,7 @@ function ViewBills() {
     useEffect(() => {
         async function fetchBills() {
             try {
-                const response = await axios.get(`http://localhost:8080/banking/viewbillsById/${customerId}`);
+                const response = await axios.get(`http://localhost:8081/banking/viewbillsById/${customerId}`);
                 // Transform the response data into a suitable format
                 const formattedBills = response.data.map(([billName, billType, provider], index) => ({
                     billId: index + 1, // Generating a unique ID for each bill

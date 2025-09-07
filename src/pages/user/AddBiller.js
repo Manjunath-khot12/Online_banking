@@ -36,7 +36,7 @@ function AddBiller() {
   async function handleSubmit() {
     setLoading(true);
     try {
-      const response = await axios.post(`http://localhost:8080/banking/addbiller?userId=${customerId}`, {billName, billType, provider});
+      const response = await axios.post(`http://localhost:8081/banking/addbiller?userId=${customerId}`, {billName, billType, provider});
       if (response.status === 200) {
         Swal.fire({
           title: 'Success!',

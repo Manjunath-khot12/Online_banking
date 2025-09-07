@@ -20,9 +20,9 @@ function BankStatementView() {
             try {
                 // Fetching account details and transaction data concurrently
                 const [response1, response2, response3] = await Promise.all([
-                    axios.get(`http://localhost:8080/banking/bankstatement/${accountNumber}`),
-                    axios.get(`http://localhost:8080/banking/bankbill/${accountNumber}?startDate=${fromDate}&endDate=${toDate}`),
-                    axios.get(`http://localhost:8080/banking/bankhistory/${accountNumber}?startDate=${fromDate}&endDate=${toDate}`)
+                    axios.get(`http://localhost:8081/banking/bankstatement/${accountNumber}`),
+                    axios.get(`http://localhost:8081/banking/bankbill/${accountNumber}?startDate=${fromDate}&endDate=${toDate}`),
+                    axios.get(`http://localhost:8081/banking/bankhistory/${accountNumber}?startDate=${fromDate}&endDate=${toDate}`)
                 ]);
 
                 // Merging all the fetched data

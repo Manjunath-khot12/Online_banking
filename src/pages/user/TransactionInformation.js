@@ -13,7 +13,7 @@ function TransactionInformation() {
     useEffect(() => {
         async function fetchTransactionDetails() {
             try {
-                const response = await axios.get(`http://localhost:8080/banking/account/${accountNumber}`);
+                const response = await axios.get(`http://localhost:8081/banking/account/${accountNumber}`);
                 setTransactionInformation(response.data);
             } catch (err) {
                 setError("Failed to fetch transaction details. Please try again later.");
