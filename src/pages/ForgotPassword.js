@@ -36,7 +36,7 @@ function ForgotPassword() {
     async function handleSubmit() {
         setLoading(true);  // Start loading spinner
         try {
-            const response = await axios.post('http://localhost:8081/banking/forgotpassword', { email });
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/banking/forgotpassword`, { email });
             if (response.status === 200) {
                 const data = response.data;
                 setFirstName(data.firstName);

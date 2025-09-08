@@ -42,7 +42,7 @@ function PayBill() {
     async function handleSubmit() {
         setLoading(true); // Set loading to true when starting submission
         try {
-            const response = await axios.post('http://localhost:8081/banking/withdrawAmount', {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/banking/withdrawAmount`, {
                 sourceAccount: {
                     accountNumber: sourceAccount
                 },

@@ -13,7 +13,7 @@ function AccountInformation() {
         // Fetch account details using the accountNumber
         async function fetchAccountDetails() {
             try {
-                const response = await axios.get(`http://localhost:8081/banking/details/${accountNumber}`);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/banking/details/${accountNumber}`);
                 setAccountDetails(response.data);
             } catch (err) {
                 setError("Failed to fetch account details. Please try again later.");

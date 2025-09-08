@@ -49,7 +49,7 @@ function Login() {
         if (isValid) {
             setLoading(true); // Show the spinner before making the request
             try {
-                const response = await axios.post('http://localhost:8081/banking/login', { id: customerId, password });
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/banking/login`, { id: customerId, password });
                 if (response.status === 200) {
                     const data = response.data;
                     setFirstName(data.firstName);

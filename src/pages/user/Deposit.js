@@ -36,7 +36,7 @@ function Deposit() {
     async function handleSubmit() {
         setLoading(true); // Set loading to true when starting submission
         try {
-            const response = await axios.post('http://localhost:8081/banking/saveDeposit', {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/banking/saveDeposit`, {
                 sourceAccount: {
                     accountNumber: sourceAccount
                 },

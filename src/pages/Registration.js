@@ -51,7 +51,8 @@ function Register() {
         console.log("Submitting data:", { firstName, lastName, phoneNumber, age, email, password, address, gender, createdDate });
         setLoading(true); // Show the spinner before making the request
         try {
-            const response = await axios.post('http://localhost:8081/banking/register', {
+            console.log(``);
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/banking/register`, {
                 firstName: firstName,
                 lastName: lastName,
                 phoneNumber: phoneNumber,

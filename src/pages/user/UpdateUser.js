@@ -51,7 +51,7 @@ function UpdateUser() {
     {
         try
         {
-            const response=await axios.put(`http://localhost:8081/banking/updateuser/${customerId}`,null,{
+            const response=await axios.put(`${process.env.REACT_APP_API_URL}/banking/updateuser/${customerId}`,null,{
                 params:{
                     age:age,
                     email:email,

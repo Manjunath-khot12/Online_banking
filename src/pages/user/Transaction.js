@@ -44,7 +44,7 @@ function Transaction() {
     async function handleSubmit() {
         setLoading(true); // Set loading to true when starting submission
         try {
-            const response = await axios.post('http://localhost:8081/banking/fundTransfer', {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/banking/fundTransfer`, {
                 sourceAccount: {
                     accountNumber: sourceAccount
                 },
